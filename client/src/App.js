@@ -1,13 +1,41 @@
+import { useEffect, useState } from "react";
 import Footer from "./components/footer/Footer";
 import { Header } from "./components/header/Header";
 
 function App() {
+  const [data, setData] = useState([{}])
+  useEffect(() => {
+    fetch('/homepage').then(
+      res => res.json()
+    ).then(
+      data => {
+        setData(data)
+        console.log(data)
+      }
+    )
+  }, []
+
+  )
   return (
+    // <div>
+    //   {
+    //     (typeof data.members === 'undefined') ? (
+    //       <p>Loading ...</p>
+    //     ) : (
+    //       data.members.map((member, i) => (
+    //         <p key={i}>{member}</p>
+    //       ))
+    //     )
+    //   }
+    // </div>
+
+
     <div className="App">
       <Header />
       <main className="main">
         <div className="container">
           <div className="search__row">
+            <p>{data.member}</p>
             <input type="text" className="search__what" placeholder="WHO    like guitarist..." />
             <input type="text" className="search__where" placeholder="WHERE   like city, state..." />
             <button className="search__btn">Search</button>
