@@ -1,14 +1,6 @@
-# from app import db
-# from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import MappedAsDataclass
 
 
-# eng = db.get_engine()
-# Base = automap_base()
-# Base.prepare(eng, reflect=True)
-# # tables = Base.metadata.tables
-
-# Artist = Base.classes.artist
-# logger.debug(Artist)
-
-
-# # class Artist(Base)
+class Base(MappedAsDataclass, DeclarativeBase):
+    """subclasses will be converted to dataclasses"""

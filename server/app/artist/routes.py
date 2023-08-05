@@ -12,6 +12,7 @@ def artist_all():
     d = [{c: v for c, v in zip(columns, row)} for row in result]
     return jsonify(d)
 
+
 @artist_bp.route("/artist/<int:id>")
 def artist(id):
     result = db.session.query(Artist).filter(Artist.c.id == id).first()
@@ -19,3 +20,4 @@ def artist(id):
     # d = [{c: v for c, v in zip(columns, row)} for row in result]
     d = {c: v for c, v in zip(columns, result)}
     return jsonify(d)
+
