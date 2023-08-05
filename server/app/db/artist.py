@@ -8,7 +8,7 @@ from typing import Optional
 
 class Artist(Base):
     __tablename__ = "artist"
-    
+
     id: Mapped[int] = mapped_column(init=False, primary_key=True)
     user_id: Mapped[int] = mapped_column(unique=True)
     artist_name: Mapped[str]
@@ -20,5 +20,5 @@ class Artist(Base):
     vk_url: Mapped[str]
     promo_video_url: Mapped[str]
     address: Mapped[str]
-    location: Mapped[str] # Mapped[Optional[str]]
+    # location: Mapped[str] # Mapped[Optional[str]]
     loc: Mapped[str]

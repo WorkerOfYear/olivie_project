@@ -21,4 +21,4 @@ def artist(id):
 @app.route("/artist/all")
 def artist_all():
     res = db.session.query(Artist).all()
-    return jsonify(users)
+    return jsonify(res)

@@ -1,8 +1,3 @@
-# cd server
-# source venv/bin/activate
-
-
-
 from app import app
 
 
