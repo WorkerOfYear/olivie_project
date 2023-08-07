@@ -1,24 +1,26 @@
-from functools import wraps
-from flask import Blueprint, redirect, url_for, render_template, request, session
+from flask import redirect, url_for, render_template, request, session, jsonify, make_response
+
 from datetime import timedelta
+from functools import wraps
 
-# Декоратор, проверяющий сессию пользователя
-def check_session(function=None):
-    @wraps(function)
-    def wrapper(*args, **kwargs):
-        if "user" not in session:
-            return redirect(url_for("auth.login"))  # Перенаправление на страницу входа, если пользователь не авторизован
-        return function(*args, **kwargs)
-    return wrapper
+from .auth_check import check_session
+from . import auth_bp
 
-# Создание blueprint для авторизации
-auth_bp = Blueprint('auth', __name__)
 
-# Секретный ключ для сессий
-auth_bp.secret_key = "hello"
+from app.db_modules.user import User
+from app.db_modules import db
 
-# Время жизни сессии (пока 10)
-auth_bp.permanent_session_lifetime = timedelta(minutes=10)
+
+@auth_bp.route("/users", methods=["GET"])
+def users_test():
+    result = db.session.query(User).all()
+    return jsonify(result)
+
+
+@auth_bp.route("/signin", methods=["GET"])
+def start():
+    return jsonify({})
+
 
 # Маршрут для входа (страница входа)
 @auth_bp.route("/login", methods=["GET"])
@@ -26,23 +28,21 @@ def login():
     # Если пользователь уже авторизован, перенаправление на страницу пользователя
     if "user" in session:
         return redirect(url_for("auth.user"))
-    return render_template("login.html")    # Иначе отображение страницы входа
+    return make_response('Not authorized', 401)  # Иначе отображение страницы входа
+
 
 # Маршрут для проверки логина и пароля
 @auth_bp.route("/check", methods=["GET"])
 def check():
     user = request.args.get("username")
     password = request.args.get("password")
-
-    # Код для проверки логина и пароля
-    # ...
-
-    if user_is_valid:   # Проверка, действителен ли пользователь с введенными данными
+    if True: # Проверка, действителен ли пользователь с введенными данными
         session.permanent = True
         session["user"] = user
         return redirect(url_for("auth.user"))   # Перенаправление на страницу
     else:
         return redirect(url_for("auth.login"))  # Перенаправление на страницу входа
+
 
 # Маршрут для страницы пользователя
 @auth_bp.route("/user")
@@ -53,12 +53,14 @@ def user():
     else:
         return redirect(url_for("auth.login"))  # Если пользователь не авторизован
 
+
 # Маршрут, требующий авторизации
 @auth_bp.route("/protected_page")
 @check_session
 def protected_page():
     user = session["user"]
     return f"<h1>This is a protected page for {user}</h1>"
+
 
 # Маршрут для выхода (разлогин)
 @auth_bp.route("/logout")
