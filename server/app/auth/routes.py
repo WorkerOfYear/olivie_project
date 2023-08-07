@@ -11,17 +11,28 @@ auth_bp.secret_key = "hello"
 auth_bp.permanent_session_lifetime = timedelta(minutes=10)
 
 # Маршрут для входа (страница входа)
-@auth_bp.route("/login", methods=["POST", "GET"])
+@auth_bp.route("/login", methods=["GET"])
 def login():
-    if request.method == "POST":
+    # Если пользователь уже авторизован, перенаправление на страницу пользователя
+    if "user" in session:
+        return redirect(url_for("auth.user"))
+    return render_template("login.html")    # Иначе отображение страницы входа
+
+# Маршрут для проверки логина и пароля
+@auth_bp.route("/check", methods=["GET"])
+def check():
+    user = request.args.get("username")
+    password = request.args.get("password")
+
+    # Код для проверки логина и пароля
+    # ...
+
+    if user_is_valid:   # Проверка, действителен ли пользователь с введенными данными
         session.permanent = True
-        user = request.form["nm"]   # Получение имени пользователя из формы
-        session["user"] = user  # Запись имени пользователя в сессию
+        session["user"] = user
         return redirect(url_for("auth.user"))   # Перенаправление на страницу
     else:
-        if "user" in session:
-            return redirect(url_for("auth.user"))   # Если пользователь авторизован
-        return render_template("login.html")
+        return redirect(url_for("auth.login"))  # Перенаправление на страницу входа
 
 # Маршрут для страницы пользователя
 @auth_bp.route("/user")
