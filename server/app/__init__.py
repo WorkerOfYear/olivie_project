@@ -1,7 +1,9 @@
-from flask import Flask, url_for, send_from_directory, jsonify, make_response
+from flask import Flask, url_for, send_from_directory, jsonify, make_response, send_file, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from loguru import logger
+
+import os
 
 from app.db.artist import Artist
 
@@ -12,13 +14,9 @@ app.config.from_object('config.DevelopmentConfig')
 db = SQLAlchemy(app)
 
 
-@app.route("/artist/<int:id>")
-def artist(id):
-    res = db.session.query(Artist).filter(Artist.id==id).first()
-    return jsonify(res)
-
-
-@app.route("/artist/all")
-def artist_all():
-    res = db.session.query(Artist).all()
-    return jsonify(res)
+@app.route('/')
+def index():
+    project_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    client_dir = os.path.join(project_dir, 'client', 'public')
+    index_path = os.path.join(client_dir, 'index.html')
+    return send_file(index_path)
