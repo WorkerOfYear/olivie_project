@@ -1,5 +1,15 @@
+from functools import wraps
 from flask import Blueprint, redirect, url_for, render_template, request, session
 from datetime import timedelta
+
+# Декоратор, проверяющий сессию пользователя
+def check_session(function=None):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        if "user" not in session:
+            return redirect(url_for("auth.login"))  # Перенаправление на страницу входа, если пользователь не авторизован
+        return function(*args, **kwargs)
+    return wrapper
 
 # Создание blueprint для авторизации
 auth_bp = Blueprint('auth', __name__)
@@ -42,6 +52,13 @@ def user():
         return f"<h1>{user}</h1>"   # Вывод имени пользователя
     else:
         return redirect(url_for("auth.login"))  # Если пользователь не авторизован
+
+# Маршрут, требующий авторизации
+@auth_bp.route("/protected_page")
+@check_session
+def protected_page():
+    user = session["user"]
+    return f"<h1>This is a protected page for {user}</h1>"
 
 # Маршрут для выхода (разлогин)
 @auth_bp.route("/logout")
