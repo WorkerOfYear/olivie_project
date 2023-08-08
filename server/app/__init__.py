@@ -11,15 +11,8 @@ app.config.from_object('config.DevelopmentConfig')
 
 from app.auth import auth_bp
 from app.artist import artist_bp
-
+from app.home import homepage_bp
 
 app.register_blueprint(auth_bp)
 app.register_blueprint(artist_bp)
-
-
-# @app.route('/')
-# def index():
-#     project_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-#     client_dir = os.path.join(project_dir, 'client', 'public')
-#     index_path = os.path.join(client_dir, 'index.html')
-#     return send_file(index_path)
+app.register_blueprint(homepage_bp)
