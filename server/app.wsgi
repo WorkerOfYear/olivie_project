@@ -1,19 +1,21 @@
+# This part of file is for server, DO NOT CHANGE!
+# ----------------------------------------------
+
 import sys
 from os import getcwd
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-sys.insert(0, getcwd())
-# project_home = '/home/pavelmalevin/web/unitapi'
-# load_dotenv(os.path.join(project_home, '.env'))
+project_home = '/var/www/olivie_project/server'
 
-activate_this = getcwd() + '/venv/bin/activate_this.py'
+sys.insert(0, project_home)
+load_dotenv(os.path.join(project_home, '.env'))
+
+activate_this = getcwd() + '/home/tamada/.virtualenvs/flask_venv'
 
 with open(activate_this) as file_:
     exec(file.read(), dict(__file__=activate_this))
 
-
 from app import app as application
-
 
 if __name__ == '__main__':
     application.run()
