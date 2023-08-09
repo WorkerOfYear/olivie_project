@@ -13,3 +13,7 @@ with open(activate_this) as file_:
 
 
 from app import app as application
+
+
+if __name__ == '__main__':
+    application.run()
