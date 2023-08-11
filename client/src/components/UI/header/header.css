@@ -1,21 +1,21 @@
 .header__ellipse {
   background: rgb(255, 219, 176);
-  width: 2500px;
-  height: 400px;
+  width: 130%;
+  height: 40VH;
   position: fixed;
-  top: -220px;
-  left: -290px;
+  left: -15%;
+  top: -20%;
   border-radius: 50%;
 }
 
 header .container {
   background: rgba(244, 244, 244, 0.361);
   width: 60%;
-  height: 60px;
+  height: 10vh;
   position: relative;
   margin: auto;
-  margin-top: 40px;
-  border-radius: 10px;
+  margin-top: 3vh;
+  border-radius: 2vh;
 }
 
 .header__row {
@@ -27,29 +27,29 @@ header .container {
   font-weight: 600;
 }
 
-.header__nav {
-  display: flex;
-}
-
 .header__logo {
-  font-size: 30px;
+  font-size: 4vh;
   margin-left: 5%;
 }
 
 .header__nav {
-  margin-right: 40%;
+  display: flex;
+  margin-right: 30vh;
+
 }
 
 .header__nav li {
-  margin: 5%;
+  margin: 1vh;
+  font-size: 2vh;
+
 }
 
 .header__signin-signup {
   background-color: rgba(221, 159, 82, 0.708);
-  border: 1px solid #222 ;
-  border-radius: 15px;
-  padding: 7px 20px;
-  font-size: 20px;
+  border: 0.1vh solid #222 ;
+  border-radius: 2vh;
+  padding: 1vh 3vh;
+  font-size: 2.5vh;
   cursor: pointer;
-  margin-right: 3%;
+  margin-right: 3vh;
 }

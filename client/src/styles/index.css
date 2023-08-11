@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap");
 
+html {
+  font-size: 16px;
+}
+
 body {
   background: #fff;
   color: #222;
@@ -9,77 +13,12 @@ body {
 
 html,
 body,
-#root,
-.App {
+#root {
   height: 100%;
 }
 
-.App {
-  display: flex;
-  flex-direction: column;
-}
-
-.main  {
-  flex: 1 0 auto;
-}
-
-.footer {
-  flex: 0 0 auto;
-}
-
-/* content part */
-
-main .container {
-  height: 60%;
-  width: 80%;
-  margin: auto;
-  margin-top: 7%;
-}
-
-.search__row {
-  width: 100%;
-  height: 15%;
-  display: flex;
-  justify-content: space-around;
-} 
-
-.search__what,
-.search__where {
-  width: 35%;
-  padding: 10px 50px;
-  border: 1px solid #222 ;
-  border-radius: 20px;
-}
-
-.search__btn {
-  background: rgba(221, 159, 82, 0.708);
-  width: 10%;
-  border: 1px solid #222 ;
-  border-radius: 20px;
-  font-size: 25px;
-}
-
-.post__row {
-  margin-top: 3%;
-  margin-left: 5%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  float: left;
-
-  font-size: 20px;
-}
-
-.post-resume,
-.post-vacancy {
-  background: rgb(255, 219, 176);
-  padding: 10px 20px;
-  border: 1px solid #222 ;
-  border-radius: 20px;
-}
-
-.content {
-  margin-left: 35rem;
-  margin-top: 5rem;
+#root {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
 }
