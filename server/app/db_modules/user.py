@@ -1,6 +1,7 @@
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import MappedAsDataclass
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey
+
+from typing import Optional, List
 
 from . import Base
 
@@ -17,3 +18,10 @@ class User(Base):
     country: Mapped[str]
     language: Mapped[str]
     photo_url: Mapped[str]
+
+    # children: Mapped[List["User"]] = relationship(back_populates="parent")
+
+    # artists: Mapped[List["Artist"]] = relationship()
+
+    # artists: Mapped[List["Artist"]] = relationship(back_populates="artist_owner")
+    # reviews: Mapped[List["Review"]] = relationship("Review", back_populates="user")
