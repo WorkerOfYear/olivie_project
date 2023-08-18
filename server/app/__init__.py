@@ -12,7 +12,9 @@ app.config.from_object('config.DevelopmentConfig')
 from app.auth import auth_bp
 from app.artist import artist_bp
 from app.home import homepage_bp
+from app.extensions.crypt import bcrypt
 
+bcrypt.init_app(app)
 app.register_blueprint(auth_bp)
 app.register_blueprint(artist_bp)
 app.register_blueprint(homepage_bp)

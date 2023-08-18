@@ -6,8 +6,11 @@ load_dotenv()
 
 
 class DevelopmentConfig(object):
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     SECRET_KEY = os.getenv('SECRET_KEY') or 'development-secret'
+
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_ECHO = True
+    
     DEBUG = True
     # APPLICATION_ROOT = os.getenv("APPLICATION_ROOT") or os.getcwd()
 

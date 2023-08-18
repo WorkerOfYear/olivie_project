@@ -1,5 +1,5 @@
 from flask import redirect, url_for, request, session, jsonify, make_response
-import bcrypt
+from flask.json import jsonify
 
 from .auth_check import protected
 from . import auth_bp
@@ -7,46 +7,101 @@ from . import auth_bp
 from app.db_modules.user import User
 from app.db_modules import db
 
+from ..extensions.crypt import bcrypt
 
-@auth_bp.route("/", methods=["GET"])
-def index():
-    return 'Some form to fill'
+@auth_bp.route("/@me")
+def get_current_user():
+    user_id = session.get("user_id")
+
+    if not user_id:
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    user = User.query.filter_by(id=user_id).first()
+    return jsonify({
+        "id": user.id,
+        "email": user.email,
+    })
+
+@auth_bp.route("/signup", method=["POST"])
+def signup():
+    email = request.json["email"]
+    password = request.json["password"]
+
+    user_exists = User.query.filter_by(email=email).first() is not None
+
+    if user_exists:
+        return jsonify({"error": "User already exists"}), 409
+
+    hashed_password = bcrypt.generate_password_hash(password)
+    new_user = User(email=email, pwd=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({
+        "id": new_user.id,
+        "email": new_user.email,
+    })
 
 
-@auth_bp.route("/signin", methods=["GET"])  # post
+@auth_bp.route("/login", methods=["POST"])
 def signin():
-    # http://127.0.0.1:5000/auth/signin?email=test@test.com&password=1234
-    #data = request.json  # Получение данных пользователя из JSON-запроса (test)
-    #email = data.get("email") (test)
-    #password = data.get("password")
-    email = request.args.get("email")
-    password = request.args.get("password")    
-    if not email or not password:
-        return make_response('Authentication failed', 401)
-        # flask.flash("Authentication failed")
-        # redirect(url_for("auth.index"))
-    user = db.session.query(User).filter_by(email=email).first()
-    if user and bcrypt.checkpw(password.encode('utf-8'), user.pwd.encode()):
-        session.permanent = True
-        session["user"] = user.id
-        return redirect(url_for("auth.user"))
-    else:
-        # flask.flash("Authentication failed")
-        # redirect(url_for("auth.index"))
-        return make_response('Authentication failed', 401)
+    email = request.json["email"]
+    password = request.json["password"]
+
+    user = User.query.filter_by(email=email).first()
+
+    if user is None:
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    if not bcrypt.check_password_hash(user.password, password):
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    session["user_id"] = user.id
+
+    return jsonify({
+        "id": user.id,
+        "email": user.email,
+    })
+
+# @auth_bp.route("/", methods=["GET"])
+# def index():
+#     return 'Some form to fill'
 
 
-@auth_bp.route("/user")
-@protected
-def user():
-    user = db.session.query(User).filter_by(id=session["user"]).first()
-    return make_response(jsonify(user), 200)
+# @auth_bp.route("/signin", methods=["GET"])  # post
+# def signin():
+#     # http://127.0.0.1:5000/auth/signin?email=test@test.com&password=1234
+#     #data = request.json  # Получение данных пользователя из JSON-запроса (test)
+#     #email = data.get("email") (test)
+#     #password = data.get("password")
+#     email = request.args.get("email")
+#     password = request.args.get("password")    
+#     if not email or not password:
+#         return make_response('Authentication failed', 401)
+#         # flask.flash("Authentication failed")
+#         # redirect(url_for("auth.index"))
+#     user = db.session.query(User).filter_by(email=email).first()
+#     if user and bcrypt.checkpw(password.encode('utf-8'), user.pwd.encode()):
+#         session.permanent = True
+#         session["user"] = user.id
+#         return redirect(url_for("auth.user"))
+#     else:
+#         # flask.flash("Authentication failed")
+#         # redirect(url_for("auth.index"))
+#         return make_response('Authentication failed', 401)
 
 
-@auth_bp.route("/logout")
-def logout():
-    session.pop("user", None)
-    return redirect(url_for("auth.index"))
+# @auth_bp.route("/user")
+# @protected
+# def user():
+#     user = db.session.query(User).filter_by(id=session["user"]).first()
+#     return make_response(jsonify(user), 200)
+
+
+# @auth_bp.route("/logout")
+# def logout():
+#     session.pop("user", None)
+#     return redirect(url_for("auth.index"))
 
 
 # # Маршрут по созданию пользователя
