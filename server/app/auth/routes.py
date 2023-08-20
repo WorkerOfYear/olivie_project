@@ -1,39 +1,58 @@
 from flask import redirect, url_for, request, session, jsonify, make_response
 from flask.json import jsonify
+import logging
+
+from app.db_modules.user import User
+from app.db_modules import db
+from app.extensions.crypt import bcrypt
 
 from .auth_check import protected
 from . import auth_bp
 
-from app.db_modules.user import User
-from app.db_modules import db
 
-from ..extensions.crypt import bcrypt
-
-@auth_bp.route("/@me")
+@auth_bp.route("/me", methods=["POST"])
 def get_current_user():
     user_id = session.get("user_id")
 
     if not user_id:
         return jsonify({"error": "Unauthorized"}), 401
     
-    user = User.query.filter_by(id=user_id).first()
+    logging.warning(user_id)
+    user = db.session.query(User).filter(User.id==user_id).first()
     return jsonify({
         "id": user.id,
         "email": user.email,
     })
 
-@auth_bp.route("/signup", method=["POST"])
+@auth_bp.route("/signup", methods=["POST"])
 def signup():
     email = request.json["email"]
     password = request.json["password"]
-
-    user_exists = User.query.filter_by(email=email).first() is not None
+    name = request.json["name"]
+    surname = request.json["surname"]
+    phone_number = request.json["phone_number"]
+    country = request.json["country"]
+    language = request.json["language"]
+    photo_url = request.json["photo_url"]
+    
+    user_exists = db.session.query(User).filter(User.email == email).first()
 
     if user_exists:
         return jsonify({"error": "User already exists"}), 409
 
-    hashed_password = bcrypt.generate_password_hash(password)
-    new_user = User(email=email, pwd=hashed_password)
+    hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+
+    new_user = User(
+        email=email, 
+        pwd=hashed_password,
+        name=name,
+        surname=surname,
+        phone_number=phone_number,
+        country=country,
+        language=language,
+        photo_url=photo_url,
+        )
+
     db.session.add(new_user)
     db.session.commit()
 
@@ -43,17 +62,17 @@ def signup():
     })
 
 
-@auth_bp.route("/login", methods=["POST"])
+@auth_bp.route("/signin", methods=["POST"])
 def signin():
     email = request.json["email"]
     password = request.json["password"]
 
-    user = User.query.filter_by(email=email).first()
+    user = db.session.query(User).filter(User.email == email).first()
 
     if user is None:
         return jsonify({"error": "Unauthorized"}), 401
     
-    if not bcrypt.check_password_hash(user.password, password):
+    if not bcrypt.check_password_hash(user.pwd, password):
         return jsonify({"error": "Unauthorized"}), 401
     
     session["user_id"] = user.id
@@ -62,6 +81,10 @@ def signin():
         "id": user.id,
         "email": user.email,
     })
+
+
+
+
 
 # @auth_bp.route("/", methods=["GET"])
 # def index():
