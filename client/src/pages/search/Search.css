@@ -1,27 +1,4 @@
 .search {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  flex: 0 0 auto;
-}
-
-.main {
-  flex: 1 0 auto;
-}
-
-.footer {
-  flex: 0 0 auto;
-}
-
-/* content part */
-
-main .container {
-  height: 100%;
-  width: 80%;
-  margin: auto;
   padding-top: 15vh;
 }
 

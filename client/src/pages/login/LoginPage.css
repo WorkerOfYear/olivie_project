@@ -1,0 +1,70 @@
+.post-form {
+  flex: 1 0 auto;
+}
+
+.post-form .container {
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  padding-top: 15vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form .container h1 {
+  font-size: 5vh;
+  width: 100%;
+  text-align: center;
+}
+
+.login-form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.login-form__email {
+  display: flex;
+  gap: 4vh;
+  padding: 5px 15px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.login-form__email label {
+  font-size: 3vh;
+}
+
+.login-form__email input {
+  font-size: 2vh;
+}
+
+.login-form__password {
+  display: flex;
+  gap: 4vh;
+  padding: 5px 15px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.login-form__password label {
+  font-size: 3vh;
+}
+
+.login-form__password input {
+  font-size: 2vh;
+}
+
+.login-form button {
+    width: 30vh;
+    background: rgba(221, 159, 82, 0.708);
+    margin: auto;
+    margin-top: 5vh;
+    font-size: 4vh;
+    border: 1px solid #000;
+    border-radius: 5px;
+}

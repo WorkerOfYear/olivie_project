@@ -7,14 +7,16 @@ export const Header = () => {
       <div className="header__ellipse"></div>
       <div className="container">
         <div className="header__row">
-          <div className="header__logo">LOGO</div>
+          <div className="header__logo"><a href="/">LOGO</a></div>
           <ul className="header__nav">
-            <li>nav1</li>
-            <li>nav2</li>
-            <li>nav3</li>
-            <li>nav4</li>
+            <li>Artist</li>
+            <li>Vacancy</li>
+            <li>About</li>
           </ul>
-          <button className="header__signin-signup">Sign in | Sign up</button>
+          <div className="header__signin-signup">
+            <a href="/login"><button className="signin_btn">Sign in</button></a>
+            <a href="/register"><button className="signup_btn">Sign up</button></a>
+          </div>
         </div>
       </div>
     </header>

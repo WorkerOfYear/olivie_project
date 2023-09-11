@@ -7,7 +7,7 @@ from app.db_modules import db
 from app.extensions.crypt import bcrypt
 
 from .auth_check import protected
-from . import auth_bp
+from . import auth_bp 
 
 
 @auth_bp.route("/me", methods=["POST"])

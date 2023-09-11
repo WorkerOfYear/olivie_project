@@ -1,6 +1,7 @@
 from flask import Flask, url_for, send_from_directory, jsonify, make_response, send_file, render_template
 from flask import session
 from flask_session import Session
+from flask_cors import CORS
 from sqlalchemy.ext.automap import automap_base
 from loguru import logger
 
@@ -26,4 +27,5 @@ app.register_blueprint(artist_bp)
 app.register_blueprint(homepage_bp)
 
 Session(app)
+CORS(app, supports_credentials=True)
 bcrypt.init_app(app)

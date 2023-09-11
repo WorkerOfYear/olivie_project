@@ -22,3 +22,18 @@ body,
 	flex-direction: column;
 	min-height: 100%;
 }
+
+
+.header {
+  flex: 0 0 auto;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
