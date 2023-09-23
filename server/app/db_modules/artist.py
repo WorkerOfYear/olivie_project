@@ -21,3 +21,5 @@ class Artist(Base):
     location: Mapped[str]
     
     activities = relationship("Activity", secondary="artist_activity", back_populates="related_artists")
+    reviews = relationship("Review", back_populates="artist")
+

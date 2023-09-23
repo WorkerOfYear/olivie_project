@@ -1,15 +1,13 @@
-# from sqlalchemy import Column, Integer, String, ForeingKey
-# from sqlalchemy.orm import relationship
+from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from . import Base
 
-# from . import Base
+class Review(Base):
+    __tablename__ = "review"
 
-# class Reviev(Base):
-# 	__tablename__ = "review"
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), primary_key=True)
+    artist_id: Mapped[int] = mapped_column(Integer, ForeignKey("artist.id"), primary_key=True)
+    grade: Mapped[int]
+    comment: Mapped[str]
 
-# 	user_id: Mapped[int] = mapped_column(primary_key=True)
-# 	artist_id: Mapped[int] = mapped_column(primary_key=True)
-# 	grade: Mapped[int]
-# 	comment: Mapped[str]
-
-# 	user: Mapped[User] = relationship("User", back_populates="reviews")
-#     artist: Mapped[Artist] = relationship("Artist", back_populates="reviews")
+    artist = relationship("Artist", back_populates="reviews")
