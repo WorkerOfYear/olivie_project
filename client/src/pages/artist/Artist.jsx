@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import "./Artist.css";
 import SearchService from "../../API/SearchService";
 import { mockArtists } from "../../API/mock/mockArtists";
+import SearchArtist from "../../components/UI/SearchArtist";
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -24,15 +25,13 @@ const Artist = () => {
 
   const fetchArtists = async () => {
     try {
-      
-      let result
+      let result;
       if (who === "" && where === "") {
         result = await SearchService.getAll();
       } else {
         result = await SearchService.getArtistByInput(who, where);
       }
       return result;
-
     } catch (err) {
       console.error(err);
     }
@@ -41,7 +40,7 @@ const Artist = () => {
   return (
     <div className="container">
       <div className="artist">
-        <p>Results of search:</p>
+        <SearchArtist />
         {data != null ? (
           <div className="artist_cards">
             {data.map((art) => (
@@ -49,21 +48,25 @@ const Artist = () => {
                 <Card style={{ maxWidth: "22rem" }}>
                   <Card.Img
                     variant="top"
+                    style={{ maxHeight: "15rem", objectFit: "cover" }}
                     // src={art.photo_url ? art.photo_url : default_placeholder}
                     src={art.photo_url}
                   />
                   <Card.Body>
-                    <Card.Title>{art.artist_name}</Card.Title>
-                    <Card.Text style={{ fontSize: "1rem" }}>
+                    <Card.Title style={{ fontSize: "2rem" }}>
+                      {art.artist_name}
+                    </Card.Title>
+                    <Card.Text style={{ fontSize: "1.2rem" }}>
                       {art.description}
                     </Card.Text>
                   </Card.Body>
                   <Button
                     onClick={() => navigate(`/artist/${art.id}/detail`)}
                     style={{
+                      fontSize: "1.3rem",
                       marginBottom: "1rem",
                       marginLeft: "1rem",
-                      width: "8rem",
+                      width: "10rem",
                     }}
                     variant="outline-dark"
                   >

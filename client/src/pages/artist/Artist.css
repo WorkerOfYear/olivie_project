@@ -5,16 +5,11 @@
   flex-direction: column;
 }
 
-.artist p {
-  margin: auto;
-  font-size: 2rem;
-}
-
 .artist_cards {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 40px;
+  margin-top: 5rem;
   gap: 5rem;
 }

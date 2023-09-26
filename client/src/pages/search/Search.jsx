@@ -1,47 +1,13 @@
 import React, { useState } from "react";
 
 import "./Search.css";
-
-import { Navigate } from "react-router-dom";
+import SearchArtist from "../../components/UI/SearchArtist";
 
 const Search = () => {
-  const [redirect, setRedirect] = useState(false);
-  const [whoInput, setWhoInput] = useState("");
-  const [whereInput, setWhereInput] = useState("");
-
-  const callSearchRequest = (e) => {
-    e.preventDefault();
-    setRedirect(true);
-  };
-
-  if (redirect) {
-    return (
-      <Navigate to={`/artist/search?who=${whoInput}&where=${whereInput}`} />
-    );
-  }
-
   return (
     <div className="container">
       <div className="search">
-        <form className="search__form">
-          <input
-            value={whoInput}
-            onChange={(e) => setWhoInput(e.target.value)}
-            type="text"
-            className="search__what"
-            placeholder="WHO    like guitarist..."
-          />
-          <input
-            value={whereInput}
-            onChange={(e) => setWhereInput(e.target.value)}
-            type="text"
-            className="search__where"
-            placeholder="WHERE   like city, state..."
-          />
-          <button className="search__btn" onClick={callSearchRequest}>
-            Search
-          </button>
-        </form>
+        <SearchArtist />
         <div className="under-search">
           <div className="post__row">
             <button className="post-resume">Post your resume</button>
