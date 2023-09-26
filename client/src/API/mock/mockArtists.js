@@ -11,14 +11,27 @@ import zveri from "./videos/demo2.mp4"
 export const mockArtists = [
     {
         id: 1,
-        artist_name: "Shir",
+        artist_name: "ShiR",
         description: "Very talanted guies, with russian rock music. A cover band with an unusual sound.",
+        info: {
+            type_of_artist: "Music band",
+            genre: "Russian Rock",
+            duration: "3 x 30min",
+            region: "Novosibirsk",
+            budget: "15000rub",
+            requirements: "If you do not have concert equipment, then rent will cost 8,000 rub.",
+        },
         photo_url: shir,
         video: [
-            {video_url: haligali_video, video_desk: "Хали-гали Леприконсы"},
-            {video_url: zveri, video_desk: "Районы-кварталы Звери"},
-        ]
-         
+            { video_url: haligali_video, video_desk: "Хали-гали Леприконсы" },
+            { video_url: zveri, video_desk: "Районы-кварталы Звери" },
+        ],
+        contacts: {
+            e_mail: 'shirband@mail.ru',
+            tg_link: '@shirband',
+            phone: '8-923-413-45-12',
+        }
+
     },
     {
         id: 2,
