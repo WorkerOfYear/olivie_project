@@ -1,74 +1,81 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 import "./Artist.css";
 import SearchService from "../../API/SearchService";
-import exmpl_img from "./default-placeholder.png";
+import { mockArtists } from "../../API/mock/mockArtists";
 
 const Artist = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const [redirect, setRedirect] = useState();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   const searchParams = new URLSearchParams(location.search);
   const who = searchParams.get("who");
   const where = searchParams.get("where");
 
   useEffect(() => {
-    fetchArtist().then((output) => setData(output));
+    fetchArtists().then((output) => {
+      output ? setData(output) : setData(mockArtists);
+    });
   }, []);
 
-  const fetchArtist = async () => {
+  const fetchArtists = async () => {
     try {
-      const result = await SearchService.getAll();
+      
+      let result
+      if (who === "" && where === "") {
+        result = await SearchService.getAll();
+      } else {
+        result = await SearchService.getArtistByInput(who, where);
+      }
       return result;
+
     } catch (err) {
       console.error(err);
     }
   };
 
-  const callArtistDetail = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
-
-  if (redirect) {
-    return <Navigate to={`/artist/detail`} />;
-  }
-
   return (
     <div className="container">
       <div className="artist">
         <p>Results of search:</p>
-        <div className="artist_cards">
-          {data.map((art) => (
-            <form key={art.id} action="">
-              <Card style={{ maxWidth: "22rem", height: "35rem" }}>
-                <Card.Img variant="top" src={exmpl_img} />
-                <Card.Body>
-                  <Card.Title>{art.artist_name}</Card.Title>
-                  <Card.Text style={{ fontSize: "1rem"}}>
-                    Description
-                  </Card.Text>
-                </Card.Body>
-                <Button
-                  onClick={callArtistDetail}
-                  style={{
-                    marginBottom: "1rem",
-                    marginLeft: "1rem",
-                    width: "8rem",
-                  }}
-                  variant="outline-dark"
-                  type="submit"
-                >
-                  Click to detail
-                </Button>
-              </Card>
-            </form>
-          ))}
-        </div>
+        {data != null ? (
+          <div className="artist_cards">
+            {data.map((art) => (
+              <form key={art.id} action="">
+                <Card style={{ maxWidth: "22rem" }}>
+                  <Card.Img
+                    variant="top"
+                    // src={art.photo_url ? art.photo_url : default_placeholder}
+                    src={art.photo_url}
+                  />
+                  <Card.Body>
+                    <Card.Title>{art.artist_name}</Card.Title>
+                    <Card.Text style={{ fontSize: "1rem" }}>
+                      {art.description}
+                    </Card.Text>
+                  </Card.Body>
+                  <Button
+                    onClick={() => navigate(`/artist/${art.id}/detail`)}
+                    style={{
+                      marginBottom: "1rem",
+                      marginLeft: "1rem",
+                      width: "8rem",
+                    }}
+                    variant="outline-dark"
+                  >
+                    Click to detail
+                  </Button>
+                </Card>
+              </form>
+            ))}
+          </div>
+        ) : (
+          <p>No results</p>
+        )}
       </div>
     </div>
   );

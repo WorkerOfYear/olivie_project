@@ -1,0 +1,76 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-top: 2rem;
+}
+
+.detail__head {
+  position: relative;
+}
+
+.photo-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.photo-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* Черный цвет с полупрозрачностью */
+  pointer-events: none; /* Чтобы позволить взаимодействие с изображением */
+}
+
+.photo-wrapper img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.photo-text {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Sumana', serif;
+  color: #fff;
+  font-size: 5rem;
+  font-weight: 400;
+}
+
+.tab-wrapper {
+  margin-bottom: 5rem;
+}
+
+.nav-item button {
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.tab-info {
+  font-size: 1.3rem;
+}
+
+.gallery__videos {
+  display: flex;
+  gap: 50px;
+  padding-top: 30px;
+}
+
+.player-wrapper {
+  width: 200px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.player-wrapper h2 {
+  font-size: 1.2rem;
+}

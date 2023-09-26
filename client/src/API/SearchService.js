@@ -12,7 +12,17 @@ export default class SearchService {
         return data
     }
 
-    static async getByInput(who_input, where_input) {
+    static async getArtistById(_artist_id) {
+        const baseURL = process.env.REACT_APP_API_URL
+        const response = await axios.get(baseURL + '/artist/id', {
+            params: {
+                artist_id: _artist_id,
+            }
+        })
+        return response
+    }
+
+    static async getArtistByInput(who_input, where_input) {
         const response = await axios.get('url', {
             params: {
                 who: who_input,

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Sumana:wght@400;700&display=swap');
 
 html {
   font-size: 16px;
@@ -14,12 +15,12 @@ body {
 html,
 body,
 #root {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
 #root {
-	display: flex;
-	flex-direction: column;
 	min-height: 100%;
 }
 
@@ -32,6 +33,7 @@ body,
   width: 80%;
   margin: auto;
   flex: 1 0 auto;
+  
 }
 
 .footer {

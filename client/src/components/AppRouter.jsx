@@ -1,10 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import About from "../pages/about/About";
-import Search from "../pages/search/Search";
-import LoginPage from "../pages/login/LoginPage";
-import Artist from "../pages/artist/Artist";
 import { routes } from "../routes";
 
 const AppRouter = () => {
@@ -12,6 +8,7 @@ const AppRouter = () => {
     <Routes>
       {routes.map((route) => (
         <Route
+          key={routes.indexOf(route)}
           element={<route.component />}
           path={route.path}
           exact={route.exact}

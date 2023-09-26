@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 
 import "./LoginPage.css";
-import PostService from "../../API/PostService";
+import PostService from "../../API/UserService";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const loginUser = async () => {
-    const response = await PostService.postLogin(email, password);
-    console.log(response);
+    try {
+      await PostService.postLogin(email, password);
+      window.location.href = "/";
+    } catch (e) {
+      if (e.response.status === 401) {
+        alert("Invalid credentials");
+      }
+    }
   };
 
   return (
@@ -41,9 +46,10 @@ function LoginPage() {
             </Form.Group>
             <Form.Group>
               <Button
-                type="submit"
+                type="button"
                 variant="outline-secondary"
-                style={{marginTop: '1rem'}}
+                style={{ marginTop: "1rem" }}
+                onClick={() => loginUser()}
               >
                 Submit
               </Button>
