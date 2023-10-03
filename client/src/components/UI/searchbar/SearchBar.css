@@ -1,0 +1,38 @@
+.search__form {
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.where_input_wrapper {
+  width: 25rem;
+  position: relative;
+}
+
+.who_input_wrapper {
+  width: 25rem;
+}
+
+.search__what,
+.search__where {
+  width: 100%;
+  height: 100%;
+  padding: 2vh 5vh;
+  font-size: 1.5rem;
+  border: 1px solid #222;
+  border-radius: 2vh;
+  font-size: 2vh;
+}
+
+.where_suggestions {
+  position: absolute;
+}
+
+.search__btn {
+  background: rgba(221, 159, 82, 0.708);
+  width: 10%;
+  border: 1px solid #222;
+  border-radius: 2vh;
+  font-size: 3vh;
+}

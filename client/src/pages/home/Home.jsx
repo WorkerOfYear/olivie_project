@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
-import "./Search.css";
-import SearchArtist from "../../components/UI/SearchArtist";
+import "./Home.css";
+import SearchBar from "../../components/UI/searchbar/SearchBar";
 
 const Search = () => {
   return (
     <div className="container">
-      <div className="search">
-        <SearchArtist />
+      <div className="home">
+        <SearchBar />
         <div className="under-search">
           <div className="post__row">
             <button className="post-resume">Post your resume</button>

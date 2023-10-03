@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CookiesProvider, useCookies } from "react-cookie";
 
-import "./header.css";
+import "./Header.css";
 import UserService from "../../../API/UserService";
 
 export const Header = () => {

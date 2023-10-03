@@ -1,30 +1,5 @@
-.search {
+.home {
   padding-top: 15vh;
-}
-
-.search__form {
-  width: 100%;
-  height: 8vh;
-  display: flex;
-  justify-content: space-around;
-}
-
-.search__what,
-.search__where {
-  width: 30%;
-  padding: 2vh 5vh;
-  font-size: 1.5rem;
-  border: 1px solid #222;
-  border-radius: 2vh;
-  font-size: 2vh;
-}
-
-.search__btn {
-  background: rgba(221, 159, 82, 0.708);
-  width: 10%;
-  border: 1px solid #222;
-  border-radius: 2vh;
-  font-size: 3vh;
 }
 
 .under-search {

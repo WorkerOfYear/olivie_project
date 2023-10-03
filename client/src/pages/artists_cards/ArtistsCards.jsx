@@ -3,10 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import "./Artist.css";
+import "./ArtistsCards.css";
 import SearchService from "../../API/SearchService";
 import { mockArtists } from "../../API/mock/mockArtists";
-import SearchArtist from "../../components/UI/SearchArtist";
+import SearchBar from "../../components/UI/searchbar/SearchBar";
+import { ARTISTDETAIL_ROUTE } from "../../routes";
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -33,14 +34,14 @@ const Artist = () => {
       }
       return result;
     } catch (err) {
-      console.error(err);
+      console.error("Ошибка при запросе к API:", err);
     }
   };
 
   return (
     <div className="container">
       <div className="artist">
-        <SearchArtist />
+        <SearchBar />
         {data != null ? (
           <div className="artist_cards">
             {data.map((art) => (
@@ -61,7 +62,7 @@ const Artist = () => {
                     </Card.Text>
                   </Card.Body>
                   <Button
-                    onClick={() => navigate(`/artist/${art.id}/detail`)}
+                    onClick={() => navigate(ARTISTDETAIL_ROUTE + `/${art.id}`)}
                     style={{
                       fontSize: "1.3rem",
                       marginBottom: "1rem",
