@@ -1,33 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
+import Button from "react-bootstrap/esm/Button";
+import { TbListSearch } from "react-icons/tb";
 
 import "./SearchBar.css";
+import search_icon from "../../../static/img/Icon/Search.svg";
 import { ARTISTSCARDS_ROUTE } from "../../../routes";
-import Button from "react-bootstrap/esm/Button";
+import SearchModal from "../searchmodal/SearchModal";
 
-const SearchBar = () => {
+const SearchBar = ({ who, where }) => {
   const [whoInput, setWhoInput] = useState("");
   const [whereInput, setWhereInput] = useState("");
   const [suggestions, setSuggestions] = useState(null);
   const [selectedSuggestion, setSelectedSuggestion] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
-
-  const handleBlur = () => {
-    setShowSuggestions(false);
-  };
 
   const handleSearchChange = (e) => {
     const text = e.target.value;
     setWhereInput(text);
   };
 
-  const handleSuggestionClick = (suggestion) => {
+  function handleSuggestionClick(suggestion) {
     setWhereInput(suggestion);
     setSelectedSuggestion(suggestion);
     setSuggestions(null);
-  };
+  }
+
+  useEffect(() => {
+    if (who !== undefined) {
+      setWhoInput(who);
+    }
+    if (where !== undefined) {
+      setWhereInput(where);
+    }
+  }, []);
 
   useEffect(() => {
     if (whereInput !== selectedSuggestion) {
@@ -65,47 +74,68 @@ pk.eyJ1IjoianVsaWV0dHdpbiIsImEiOiJjbG43amQydmIweWMwMmtwZnN3ZzE3OHA4In0.3zvwgivCf
       </div>
 
       <div className="where_input_wrapper">
-        <input
-          value={whereInput}
-          onBlur={handleBlur}
-          onFocus={() => setShowSuggestions(true)}
-          onChange={handleSearchChange}
-          type="text"
-          className="search__where"
-          id="where_input"
-          placeholder="WHERE   like city, state..."
-        />
-        {suggestions && showSuggestions && (
-          <div className="suggestions_wrapper">
-            <ListGroup
-              className="where_suggestions"
-              id="where_suggestions"
-              style={{ zIndex: 1000 }}
-            >
-              {suggestions.map((suggestion) => (
-                <Button variant="light">
-                  <ListGroup.Item
+        <button
+          className="search__burger"
+          onClick={(e) => {
+            e.preventDefault();
+            setModalShow(true);
+          }}
+        >
+          <TbListSearch />
+        </button>
+        <SearchModal show={modalShow} onHide={() => setModalShow(false)} />
+        <div
+          tabIndex={-1}
+          onBlur={() => {
+            console.log("Blur");
+            setShowSuggestions(false);
+          }}
+          onFocus={() => {
+            console.log("Focus");
+            setShowSuggestions(true);
+          }}
+        >
+          <input
+            value={whereInput}
+            onChange={handleSearchChange}
+            type="text"
+            className="search__where"
+            id="where_input"
+            placeholder="WHERE   like city, state..."
+          />
+          {suggestions && (
+            <div className="suggestions_wrapper">
+              <ListGroup
+                className="where_suggestions"
+                id="where_suggestions"
+                style={{ zIndex: 1000 }}
+              >
+                {suggestions.map((suggestion) => (
+                  <Button
+                    variant="light"
                     key={suggestion.id}
                     onClick={() => handleSuggestionClick(suggestion.place_name)}
                   >
                     {suggestion.place_name}
-                  </ListGroup.Item>
-                </Button>
-              ))}
-            </ListGroup>
-          </div>
-        )}
+                  </Button>
+                ))}
+              </ListGroup>
+            </div>
+          )}
+        </div>
       </div>
 
       <button
         className="search__btn"
-        onClick={() =>
+        onClick={(e) => {
+          e.preventDefault();
           navigate(
             ARTISTSCARDS_ROUTE + `/search?who=${whoInput}&where=${whereInput}`
-          )
-        }
+          );
+        }}
       >
-        Search
+        <img src={search_icon} alt="" />
+        <span>SEARCH</span>
       </button>
     </form>
   );

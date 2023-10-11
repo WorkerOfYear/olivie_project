@@ -41,7 +41,7 @@ const Artist = () => {
   return (
     <div className="container">
       <div className="artist">
-        <SearchBar />
+        <SearchBar who={who} where={where}/>
         {data != null ? (
           <div className="artist_cards">
             {data.map((art) => (

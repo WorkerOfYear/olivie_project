@@ -1,34 +1,53 @@
 .home {
-  padding-top: 15vh;
+  height: 100%;
+  padding-top: 100px;
 }
 
 .under-search {
-  padding-top: 3vh;
+  width: 100%;
   display: inline-block;
+  position: relative;
+  padding-top: 3vh;
+}
+
+.back-stars {
+  width: 100%;
+  position: absolute;
 }
 
 .post__row {
-  margin-left: 5%;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  gap: 2rem;
+  flex-direction: row;
   justify-content: space-evenly;
-  float: left;
-  font-size: 1.5rem;
-  height: 30vh;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .post-resume,
 .post-vacancy {
-  background: rgb(255, 219, 176);
-  padding: 1vh 4vh;
+  padding: 1rem 3rem;
   border: 1px solid #222;
-  border-radius: 2vh;
-  font-size: 2vh;
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
 }
 
-.content {
-  margin-left: 45vh;
-  margin-top: 6vh;
-  margin-right: 5%;
-  font-size: 2vh;
+.post-resume {
+  background: #6E38F7;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
 }
+
+.post-vacancy {
+  background: #fff;
+  color: #6E38F7;
+  border: 1px solid #6E38F7;
+  border-radius: 5px;
+}
+

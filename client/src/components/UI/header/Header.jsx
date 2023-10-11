@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CookiesProvider, useCookies } from "react-cookie";
 
 import "./Header.css";
+import Logo from "../../../static/img/Logo.svg";
 import UserService from "../../../API/UserService";
 
 export const Header = () => {
@@ -28,16 +29,23 @@ export const Header = () => {
 
   return (
     <header className="header">
-      <div className="header__ellipse"></div>
       <div className="container">
         <div className="header__row">
           <div className="header__logo">
-            <a href="/">LOGO</a>
+            <a href="/">
+              <img src={Logo} />
+            </a>
           </div>
           <ul className="header__nav">
-            <li>Artist</li>
-            <li>Vacancy</li>
-            <li>About</li>
+            <li>
+              <button>ARTIST</button>
+            </li>
+            <li>
+              <button>VACANCY</button>
+            </li>
+            <li>
+              <button>ABOUT</button>
+            </li>
           </ul>
           {cookie.user_id ? (
             <div>
@@ -46,13 +54,9 @@ export const Header = () => {
               <button onClick={logoutUser}>Logout</button>
             </div>
           ) : (
-            <div className="header__signin-signup">
-              <a href="/login">
-                <button className="signin_btn">Sign in</button>
-              </a>
-              <a href="/register">
-                <button className="signup_btn">Sign up</button>
-              </a>
+            <div className="signin-signup">
+              <button className="signin_btn">SIGN IN</button>
+              <button className="signup_btn">SIGN UP</button>
             </div>
           )}
         </div>
