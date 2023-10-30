@@ -1,4 +1,4 @@
-.post-form{
+.post-form {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -9,6 +9,7 @@
 }
 
 .post-form h1 {
+  font-family: "Rubik", sans-serif;
   font-size: 2rem;
   text-align: center;
 }

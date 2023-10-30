@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/esm/Button";
-import { TbListSearch } from "react-icons/tb";
+import { CiLocationOn } from "react-icons/ci";
 
 import "./SearchBar.css";
 import search_icon from "../../../static/img/Icon/Search.svg";
 import { ARTISTSCARDS_ROUTE } from "../../../routes";
 import SearchModal from "../searchmodal/SearchModal";
+import Suggestions from "../suggestions/Suggestions";
 
 const SearchBar = ({ who, where }) => {
   const [whoInput, setWhoInput] = useState("");
@@ -23,7 +22,7 @@ const SearchBar = ({ who, where }) => {
     setWhereInput(text);
   };
 
-  function handleSuggestionClick(suggestion) {
+  function handleWhereSuggestionClick(suggestion) {
     setWhereInput(suggestion);
     setSelectedSuggestion(suggestion);
     setSuggestions(null);
@@ -49,6 +48,7 @@ pk.eyJ1IjoianVsaWV0dHdpbiIsImEiOiJjbG43amQydmIweWMwMmtwZnN3ZzE3OHA4In0.3zvwgivCf
           );
           if (response.ok) {
             const data = await response.json();
+            console.log(data.features);
             setSuggestions(data.features);
           }
         } catch (error) {
@@ -62,7 +62,7 @@ pk.eyJ1IjoianVsaWV0dHdpbiIsImEiOiJjbG43amQydmIweWMwMmtwZnN3ZzE3OHA4In0.3zvwgivCf
   }, [whereInput]);
 
   return (
-    <form className="search__form">
+    <div className="search">
       <div className="who_input_wrapper">
         <input
           value={whoInput}
@@ -72,59 +72,45 @@ pk.eyJ1IjoianVsaWV0dHdpbiIsImEiOiJjbG43amQydmIweWMwMmtwZnN3ZzE3OHA4In0.3zvwgivCf
           placeholder="WHO    like guitarist..."
         />
       </div>
-
-      <div className="where_input_wrapper">
-        <button
-          className="search__burger"
-          onClick={(e) => {
-            e.preventDefault();
-            setModalShow(true);
-          }}
-        >
-          <TbListSearch />
-        </button>
-        <SearchModal show={modalShow} onHide={() => setModalShow(false)} />
-        <div
-          tabIndex={-1}
-          onBlur={() => {
-            console.log("Blur");
+      <div
+        className="where_input_wrapper"
+        tabIndex={1}
+        onFocus={() => {
+          console.log("Focus");
+          setShowSuggestions(true);
+        }}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) {
             setShowSuggestions(false);
-          }}
-          onFocus={() => {
-            console.log("Focus");
-            setShowSuggestions(true);
-          }}
-        >
-          <input
-            value={whereInput}
-            onChange={handleSearchChange}
-            type="text"
-            className="search__where"
-            id="where_input"
-            placeholder="WHERE   like city, state..."
-          />
-          {suggestions && (
-            <div className="suggestions_wrapper">
-              <ListGroup
-                className="where_suggestions"
-                id="where_suggestions"
-                style={{ zIndex: 1000 }}
-              >
-                {suggestions.map((suggestion) => (
-                  <Button
-                    variant="light"
-                    key={suggestion.id}
-                    onClick={() => handleSuggestionClick(suggestion.place_name)}
-                  >
-                    {suggestion.place_name}
-                  </Button>
-                ))}
-              </ListGroup>
-            </div>
+          }
+        }}
+      >
+        <input
+          value={whereInput}
+          onChange={handleSearchChange}
+          type="text"
+          className="search__where"
+          placeholder="WHERE   like city, state..."
+        />
+        <div className="where_suggestions">
+          {suggestions && showSuggestions && (
+            <Suggestions
+              suggestions={suggestions}
+              handleSuggestionClick={handleWhereSuggestionClick}
+            />
           )}
         </div>
       </div>
-
+      <button
+        className="location_icon"
+        onClick={(e) => {
+          e.preventDefault();
+          setModalShow(true);
+        }}
+      >
+        <CiLocationOn />
+      </button>
+      <SearchModal show={modalShow} onHide={() => setModalShow(false)} />
       <button
         className="search__btn"
         onClick={(e) => {
@@ -137,7 +123,7 @@ pk.eyJ1IjoianVsaWV0dHdpbiIsImEiOiJjbG43amQydmIweWMwMmtwZnN3ZzE3OHA4In0.3zvwgivCf
         <img src={search_icon} alt="" />
         <span>SEARCH</span>
       </button>
-    </form>
+    </div>
   );
 };
 

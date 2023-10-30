@@ -25,9 +25,18 @@
 }
 
 .header__nav li button {
+  width: 5rem;
+  height: 2rem;
   font-weight: 400;
   font-size: 0.8rem;
   letter-spacing: 2px;
+  transition: 0.5s ease;
+}
+
+.header__nav li button:hover {
+  -moz-box-shadow: 0 0 2px #6e38f7;
+  -webkit-box-shadow: 0 0 2px #6e38f7;
+  box-shadow: 2px 2px 2px 2px #6e38f7;
 }
 
 .signin-signup {
@@ -40,6 +49,10 @@
   letter-spacing: 2px;
   color: #6E38F7;
   transition: 0.4s ease;
+}
+
+.signin_btn:hover {
+  transform: scale(1.05);
 }
 
 .signup_btn {

@@ -5,11 +5,4 @@
   flex-direction: column;
 }
 
-.artist_cards {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: first baseline;
-  justify-content: space-evenly;
-  margin-top: 5rem;
-  gap: 5rem;
-}
+

@@ -1,0 +1,13 @@
+.btn_wrapper {
+    display: flex;
+    justify-content: flex-end;    
+}
+
+.btn_wrapper button:hover {
+    background-color: #6e38f7;
+    border-color: #6e38f7;
+}
+
+.custom_shadow:focus {
+    box-shadow: 0 0 0 0.1rem #6e38f7;
+}

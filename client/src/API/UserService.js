@@ -14,6 +14,7 @@ export default class UserService {
             return response
         } catch (error) {
             console.log(error)
+            return error
         }
     }
 

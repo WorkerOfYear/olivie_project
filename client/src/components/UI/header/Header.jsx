@@ -1,30 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { CookiesProvider, useCookies } from "react-cookie";
+// import { CookiesProvider, useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 import "./Header.css";
 import Logo from "../../../static/img/Logo.svg";
 import UserService from "../../../API/UserService";
+import { LOGIN_ROUTE, REGISTER_ROUTE } from "../../../routes";
+import AccDropdown from "../accdropdown/AccDropdown";
 
 export const Header = () => {
-  const [cookie, setCookie] = useCookies(["user_id"]);
+  // const [cookie, setCookie] = useCookies(["user_id"]);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  // console.log(cookie.user_id)
-
-  // useEffect(() => {
-  //   fetchUser().then((data) => setUser(data));
-  // }, []);
+  useEffect(() => {
+    // fetchUser().then((data) =>
+    //   data ? setUser(data) : setUser({ name: "artem" })
+    // );
+    setUser(true)
+  }, []);
 
   // const fetchUser = async () => {
-  //   try {
-  //     const result = await UserService.showLogin();
+  //   const result = await UserService.showLogin();
+  //   if (result) {
   //     return result.data;
-  //   } catch (err) {
-  //     console.error(err);
   //   }
   // };
 
   const logoutUser = async () => {
-    await UserService.logout();
+    // await UserService.logout();
+    // window.location.href = "/";
+    setUser(false)
   };
 
   return (
@@ -47,16 +53,26 @@ export const Header = () => {
               <button>ABOUT</button>
             </li>
           </ul>
-          {cookie.user_id ? (
-            <div>
-              <h2>Hello</h2>
-              <h2>{cookie.user_id.name}</h2>
-              <button onClick={logoutUser}>Logout</button>
-            </div>
+          {user ? (
+            <AccDropdown logout={logoutUser}/>
           ) : (
             <div className="signin-signup">
-              <button className="signin_btn">SIGN IN</button>
-              <button className="signup_btn">SIGN UP</button>
+              <button
+                className="signin_btn"
+                onClick={() => {
+                  navigate(LOGIN_ROUTE);
+                }}
+              >
+                SIGN IN
+              </button>
+              <button
+                className="signup_btn"
+                onClick={() => {
+                  navigate(REGISTER_ROUTE);
+                }}
+              >
+                SIGN UP
+              </button>
             </div>
           )}
         </div>
