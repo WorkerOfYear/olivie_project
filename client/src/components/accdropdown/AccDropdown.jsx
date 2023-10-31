@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { VscAccount } from "react-icons/vsc";
-import { MY_RESUME } from "../../../routes";
+import { MY_RESUME } from "../../routes";
 
 import "./AccDropdown.css";
 

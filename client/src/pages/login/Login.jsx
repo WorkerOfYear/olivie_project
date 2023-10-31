@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./Login.css";
 import UserService from "../../API/UserService";
-import AuthForm from "../../components/UI/authform/AuthForm";
+import AuthForm from "../../components/authform/AuthForm";
 
 function Login() {
   const [email, setEmail] = useState("");

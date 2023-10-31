@@ -4,8 +4,8 @@ import ArtistDetail from "./pages/artist_detail/ArtistDetail";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
-import MyResume from "./components/UI/myresume/MyResume";
-import CreateResume from "./components/UI/createresume/CreateResume";
+import MyResume from "./pages/myresume/MyResume";
+import CreateResume from "./components/createresume/CreateResume";
 
 export const ABOUT_ROUTE = '/about';
 export const ARTISTSCARDS_ROUTE = '/artists-cards';

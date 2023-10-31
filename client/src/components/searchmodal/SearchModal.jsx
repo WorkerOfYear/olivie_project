@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Pagination from "react-bootstrap/Pagination";
 
 const SearchModal = (props) => {

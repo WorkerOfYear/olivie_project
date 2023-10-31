@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./Header.css";
-import Logo from "../../../static/img/Logo.svg";
-import UserService from "../../../API/UserService";
-import { LOGIN_ROUTE, REGISTER_ROUTE } from "../../../routes";
+import Logo from "../../static/img/Logo.svg";
+import UserService from "../../API/UserService";
+import { LOGIN_ROUTE, REGISTER_ROUTE } from "../../routes";
 import AccDropdown from "../accdropdown/AccDropdown";
 
 export const Header = () => {

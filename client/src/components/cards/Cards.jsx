@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 
-import { ARTISTDETAIL_ROUTE } from "../../../routes";
+import { ARTISTDETAIL_ROUTE } from "../../routes";
 import "./Cards.css"
 
 const Cards = ({ artists }) => {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Home.css";
-import SearchBar from "../../components/UI/searchbar/SearchBar";
+import SearchBar from "../../components/searchbar/SearchBar";
 import StarsBanner from "../../static/img/stars_banner.png";
 
 const Search = () => {

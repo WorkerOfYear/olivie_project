@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import "./ArtistDetail.css";
 import { mockArtists } from "../../API/mock/mockArtists";
-import ArtistTabs from "../../components/UI/artisttabs/ArtistTabs";
+import ArtistTabs from "../../components/artisttabs/ArtistTabs";
 
 const Artist_detail = () => {
   const [artist, setArtist] = useState();

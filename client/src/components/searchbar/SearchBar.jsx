@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 
 import "./SearchBar.css";
-import search_icon from "../../../static/img/Icon/Search.svg";
-import { ARTISTSCARDS_ROUTE } from "../../../routes";
+import search_icon from "../../static/img/Icon/Search.svg";
+import { ARTISTSCARDS_ROUTE } from "../../routes";
 import SearchModal from "../searchmodal/SearchModal";
 import Suggestions from "../suggestions/Suggestions";
 

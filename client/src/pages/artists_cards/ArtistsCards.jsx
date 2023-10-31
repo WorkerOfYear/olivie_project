@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 import "./ArtistsCards.css";
 import SearchService from "../../API/SearchService";
 import { mockArtists } from "../../API/mock/mockArtists";
-import SearchBar from "../../components/UI/searchbar/SearchBar";
-import Cards from "../../components/UI/cards/Cards";
+import SearchBar from "../../components/searchbar/SearchBar";
+import Cards from "../../components/cards/Cards";
 
 const Artist = () => {
   const location = useLocation();
