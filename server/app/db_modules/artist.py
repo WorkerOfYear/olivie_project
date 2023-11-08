@@ -1,6 +1,4 @@
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import MappedAsDataclass
+from sqlalchemy.orm import Mapped, mapped_column, MappedAsDataclass, relationship
 
 from . import Base
 from typing import Optional
@@ -20,5 +18,8 @@ class Artist(Base):
     vk_url: Mapped[str]
     promo_video_url: Mapped[str]
     address: Mapped[str]
-    # location: Mapped[str] # Mapped[Optional[str]]
-    loc: Mapped[str]
+    location: Mapped[str]
+    
+    activities = relationship("Activity", secondary="artist_activity", back_populates="related_artists")
+    reviews = relationship("Review", back_populates="artist")
+
