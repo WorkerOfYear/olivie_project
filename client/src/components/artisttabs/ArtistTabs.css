@@ -1,0 +1,33 @@
+.nav-item button {
+  font-size: 1.5rem;
+  color: #000;
+}
+
+.tab-info {
+  font-size: 1.3rem;
+}
+
+.gallery__videos {
+  display: flex;
+  gap: 50px;
+  padding-top: 30px;
+}
+
+.player-wrapper {
+  width: 200px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.player-wrapper h2 {
+  font-size: 1.2rem;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}

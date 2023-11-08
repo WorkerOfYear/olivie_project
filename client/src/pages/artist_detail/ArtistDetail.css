@@ -1,0 +1,50 @@
+.detail {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+}
+
+.detail__head {
+  position: relative;
+}
+
+.photo-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.photo-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* Черный цвет с полупрозрачностью */
+}
+
+.photo-wrapper img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.photo-text {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Sumana", serif;
+  color: #fff;
+  font-size: 5rem;
+  font-weight: 400;
+}
+
+.tab-wrapper {
+  margin-bottom: 5rem;
+}
+

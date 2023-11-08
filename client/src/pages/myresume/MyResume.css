@@ -1,0 +1,26 @@
+.my-resume {
+    margin-top: 2rem;
+    margin-right: 15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.create-btn {
+    color: black;
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #f1f1f1;
+    transition: 0.4s ease;
+}
+
+.create-btn:hover {
+    border: 1px solid #6e38f7;
+    box-shadow: 0 0 10px #6e38f7;
+}
+
+.no-resume {
+    margin-top: 5rem;
+    font-size: 1.5rem;
+}

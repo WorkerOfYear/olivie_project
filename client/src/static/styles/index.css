@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:wght@400;600&family=Sumana:wght@400;700&display=swap');
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background: #fff;
+  color: #222;
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+}
+
+html,
+body,
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#root {
+	min-height: 100%;
+}
+
+
+.header {
+  flex: 0 0 auto;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.shadow-secondary {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.147);
+}
