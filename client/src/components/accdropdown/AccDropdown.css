@@ -1,0 +1,47 @@
+.profile {
+  position: relative;
+}
+
+.profile-icon-wrapper {
+  cursor: pointer;
+  font-size: 2.5rem;
+  color: #6e38f7;
+  transition: 0.3s ease;
+}
+
+.profile-icon-wrapper:hover {
+  transform: scale(1.2);
+}
+
+.account-dropdown {
+  position: absolute;
+  left: -70px;
+  min-width: 200px;
+  padding-top: 15px;
+  background-color: #fff;
+  list-style-type: none;
+  border: 1px solid #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.147);
+}
+
+.account-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.account-menu li button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+}
+
+.account-menu li button a {
+    color: black;
+}
+
+.account-menu li button:hover {
+    text-decoration: underline;
+    text-decoration-color: #6e38f7;
+    text-decoration-thickness: 3px;
+}
