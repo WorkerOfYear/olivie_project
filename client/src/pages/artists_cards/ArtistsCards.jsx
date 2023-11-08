@@ -6,6 +6,7 @@ import SearchService from "../../API/SearchService";
 import { mockArtists } from "../../API/mock/mockArtists";
 import SearchBar from "../../components/searchbar/SearchBar";
 import Cards from "../../components/cards/Cards";
+import Filter from "../../components/ filter/Filter";
 
 const Artist = () => {
   const location = useLocation();
@@ -39,6 +40,7 @@ const Artist = () => {
     <div className="container">
       <div className="artist">
         <SearchBar who={who} where={where} />
+        <Filter />
         {data != null ? <Cards artists={data} /> : <p>No results</p>}
       </div>
     </div>

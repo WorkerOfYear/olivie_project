@@ -1,0 +1,16 @@
+.filter-form {
+    width: 80%;
+    margin: auto;
+}
+
+.sort_by {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.last_row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
