@@ -22,12 +22,14 @@ from app.artist import artist_bp
 from app.home import homepage_bp
 from app.extensions.crypt import bcrypt
 from app.geocoding import geocoding_bp
+from app.artist_crud import artist_crud_bp
 
-app.register_blueprint(auth_bp)
-app.register_blueprint(artist_bp)
-app.register_blueprint(homepage_bp)
-app.register_blueprint(geocoding_bp)
 
 Session(app)
 CORS(app, supports_credentials=True)
 bcrypt.init_app(app)
+app.register_blueprint(artist_crud_bp)
+app.register_blueprint(auth_bp)
+app.register_blueprint(artist_bp)
+app.register_blueprint(homepage_bp)
+app.register_blueprint(geocoding_bp)
