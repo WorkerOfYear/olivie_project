@@ -15,6 +15,7 @@ class DevelopmentConfig(object):
     DEBUG = True
 
     # APPLICATION_ROOT = os.getenv("APPLICATION_ROOT") or os.getcwd()
+    MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
 
 # class ProductionConfig(Config):
 #     DATABASE_URI = 'mysql://user@localhost/foo'

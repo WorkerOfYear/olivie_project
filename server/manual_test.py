@@ -3,10 +3,14 @@ from loguru import logger
 import requests
 
 
+
 # token = Config.BUBBLE_TOKEN
 base = 'http://127.0.0.1:5000'
+json_data = {
+    'address': 'Советская улица, 34, Новосибирск',
+    'radius': 1
+}
 
-
-ans = requests.get(base+f'/auth/login?login')
-
-logger.debug(ans.text)
+ans = requests.post(base+f'/geoapi/find_artists', json = json_data)
+logger.debug(ans.json())
+logger.debug(len(ans.json()))
