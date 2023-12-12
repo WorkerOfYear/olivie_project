@@ -1,8 +1,10 @@
 from sqlalchemy import Column, Integer, ForeignKey
+from dataclasses import dataclass
 
 from . import Base
 
 
+@dataclass
 class ArtistActivity(Base):
     __tablename__ = "artist_activity"
       

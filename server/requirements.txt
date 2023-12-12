@@ -1,10 +1,13 @@
 aniso8601==9.0.1
+async-timeout==4.0.3
 bcrypt==4.0.1
 blinker==1.6.2
 cachelib==0.10.2
 certifi==2023.7.22
 charset-normalizer==3.2.0
 click==8.1.6
+dataclasses==0.6
+dataclasses-serialization==1.3.1
 Flask==2.3.2
 Flask-Bcrypt==1.0.1
 Flask-Cors==4.0.0
@@ -19,6 +22,8 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 loguru==0.7.0
 MarkupSafe==2.1.3
+more-properties==1.1.1
+mypy-extensions==1.0.0
 pipdeptree==2.13.0
 psycopg2-binary==2.9.6
 python-dotenv==1.0.0
@@ -29,6 +34,9 @@ redis==5.0.0
 requests==2.31.0
 six==1.16.0
 SQLAlchemy==2.0.19
+toolz==0.12.0
+toposort==1.10
+typing-inspect==0.9.0
 typing_extensions==4.7.1
 urllib3==2.0.4
 Werkzeug==2.3.6
