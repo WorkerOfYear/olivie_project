@@ -5,6 +5,7 @@ from flask_restful import Api, Resource, abort
 from sqlalchemy import func
 import requests
 from loguru import logger
+from difflib import get_close_matches
 
 from app.db_modules.artist import Artist
 from app.db_modules import db
@@ -20,6 +21,8 @@ ps.add_argument(
     'address', required=True, nullable=False, store_missing=False)
 ps.add_argument(
     'radius', required=True, nullable=False, store_missing=False, type=int)
+ps.add_argument(
+    'activity', required=False, nullable=True, store_missing=True, action='append')
 
 
 class GeoResource(Resource):
@@ -27,6 +30,7 @@ class GeoResource(Resource):
         args = ps.parse_args()
         if args['radius'] <= 0:
             abort(400, message='Radius must be greater than 0 km')
+        # logger.debug(args['activity'])
         mapbox_access_token = 'some-token'
         geocoding_url = f'https://api.mapbox.com/geocoding/v5/mapbox.places/{args["address"]}.json'
         params = {
