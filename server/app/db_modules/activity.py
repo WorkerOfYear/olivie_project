@@ -1,9 +1,12 @@
 from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from dataclasses import dataclass
+
 
 from . import Base
 
 
+@dataclass
 class Activity(Base):
     __tablename__ = "activity"
 
