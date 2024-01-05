@@ -1,8 +1,9 @@
 import React from "react";
 
+import StarsBanner from "static/img/stars_banner.png";
+import SearchBar from "components/searchbar/SearchBar";
+
 import "./Home.css";
-import SearchBar from "../../components/searchbar/SearchBar";
-import StarsBanner from "../../static/img/stars_banner.png";
 
 const Search = () => {
   return (

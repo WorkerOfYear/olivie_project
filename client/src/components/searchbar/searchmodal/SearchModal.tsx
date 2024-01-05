@@ -1,20 +1,43 @@
-import React, { useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import Pagination from "react-bootstrap/Pagination";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { selectRadius, set_radius } from "store/searchReducer";
 
-const SearchModal = (props) => {
-  const [active, setActive] = useState(null);
+interface SearchModalProps {
+  radius?: number;
+  show: boolean;
+  onHide: () => void;
+}
+
+const SearchModal: FC<SearchModalProps> = (props) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (props.radius !== undefined) {
+      dispatch(set_radius(props.radius));
+    }
+  }, []);
+
+  const radiusValue = useAppSelector(selectRadius);
+
   let radius_list = [1, 2, 3, 4, 5, 10, 15, 25, 50, 100, 150];
   let items = [];
+
   for (let i = 0; i < radius_list.length; i += 1) {
     items.push(
-      <Pagination.Item key={i} active={radius_list[i] === active}>
+      <Pagination.Item
+        key={i}
+        active={radius_list[i] === radiusValue}
+        onClick={() => dispatch(set_radius(radius_list[i]))}
+      >
         {radius_list[i]}
       </Pagination.Item>
     );
   }
+
   return (
     <Modal
       {...props}

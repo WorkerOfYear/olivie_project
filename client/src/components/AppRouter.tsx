@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { routes } from "../routes";
+import { routes } from "routes";
 
 const AppRouter = () => {
   return (
@@ -11,7 +11,6 @@ const AppRouter = () => {
           key={routes.indexOf(route)}
           element={<route.component />}
           path={route.path}
-          exact={route.exact}
         />
       ))}
       <Route path="*" element={<Navigate to="/" replace />} />

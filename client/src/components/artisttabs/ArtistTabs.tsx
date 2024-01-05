@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import ReactPlayer from "react-player";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -6,16 +6,21 @@ import { BiLogoTelegram } from "react-icons/bi";
 import { AiOutlinePhone } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 
-import "./ArtistTabs.css"
+import { IArtist } from "types/types";
+import "./ArtistTabs.css";
 
-const ArtistTabs = ({artist}) => {
+interface ArtistTabsProps {
+  artist: IArtist;
+}
+
+const ArtistTabs: FC<ArtistTabsProps> = ({ artist }) => {
   return (
     <Tabs defaultActiveKey="info" className="mb-2 mt-4">
       <Tab eventKey="info" title="Info">
         <p>
           <span className="tab-info">{artist.description}</span>
         </p>
-        <p>
+        {/* <p>
           Type of artist: <i>{artist.info.type_of_artist}.</i>
         </p>
         <p>
@@ -33,11 +38,11 @@ const ArtistTabs = ({artist}) => {
         <p>
           Requirements for equipment and technical conditions:
           <i>{artist.info.requirements}</i>
-        </p>
+        </p> */}
       </Tab>
       <Tab eventKey="gallery" title="Gallery">
         <div className="gallery__videos">
-          {artist.video ? (
+          {/* {artist.video ? (
             artist.video.map((item) => (
               <div key={item.video_url} className="player-wrapper">
                 <h2>{item.video_desk}</h2>
@@ -51,12 +56,13 @@ const ArtistTabs = ({artist}) => {
             ))
           ) : (
             <p>No gallery</p>
-          )}
+          )} */}
+          {artist.promo_video_url}
         </div>
       </Tab>
       <Tab eventKey="contacts" title="Contacts">
         <div className="contacts">
-          <span>
+          {/* <span>
             <AiOutlinePhone />: {artist.contacts.phone}
           </span>
           <span>
@@ -64,11 +70,16 @@ const ArtistTabs = ({artist}) => {
           </span>
           <span>
             <HiOutlineMail />: {artist.contacts.e_mail}
-          </span>
+          </span> */}
+          <span>email: {artist.email}</span>
+          <span>phone_number: {artist.phone_number}</span>
+          <span>facebook_url: {artist.facebook_url}</span>
+          <span>instagram_url: {artist.instagram_url}</span>
+          <span>vk_url: {artist.vk_url}</span>
         </div>
       </Tab>
-      <Tab eventKey="rating" title="Rating">
-        Tab content for Rating
+      <Tab eventKey="reviews" title="Reviews">
+        {artist.reviews ? <div>{JSON.stringify(artist.reviews)}</div> : null}
       </Tab>
     </Tabs>
   );

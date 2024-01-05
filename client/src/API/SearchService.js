@@ -1,34 +1,35 @@
 import axios from 'axios'
 
+const baseURL = import.meta.env.VITE_API_URL
 
 export default class SearchService {
+    static async searchArtists(address, radius, activity) {
+        try {
+            const { data, status, statusText } = await axios.post(baseURL + '/geoapi/find_artists', {
+                'address': address,
+                'radius': radius,
+                'activity': activity,
+            })
 
-    static async getAll() {
-        const baseURL = process.env.REACT_APP_API_URL
-        const { data, status, statusText } = await axios.get(baseURL + '/artist/all')
+            console.log(data, status, statusText)
+            
+            if (status === 200 && data[0]) {
+                return data
+            } else {
+                return null
+            } 
 
-        if (status >= 400) { throw new Error(statusText) }
-
-        return data
+        } catch (error) {
+            console.log(error)
+            return null
+        }
     }
 
-    static async getArtistById(_artist_id) {
-        const baseURL = process.env.REACT_APP_API_URL
-        const response = await axios.get(baseURL + '/artist/id', {
-            params: {
-                artist_id: _artist_id,
-            }
-        })
-        return response
-    }
-
-    static async getArtistByInput(who_input, where_input) {
-        const response = await axios.get('url', {
-            params: {
-                who: who_input,
-                where: where_input
-            }
-        })
-        return response
+    static async getArtistById(artist_id) {
+        const { data, status, statusText } = await axios.get(baseURL + `/artist/${artist_id}`)
+        if (status === 200) {
+            console.log(data)
+            return data
+        }
     }
 }

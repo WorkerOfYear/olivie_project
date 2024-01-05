@@ -2,12 +2,18 @@
   "name": "search_musicians",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:5000",
+  "proxy": "http://176.53.162.194:5000",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/axios": "^0.14.0",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "axios": "^1.4.0",
     "holderjs": "^2.9.9",
     "mapbox-gl": "^2.15.0",
@@ -20,16 +26,19 @@
     "react-icons": "^4.11.0",
     "react-map-gl": "^7.1.6",
     "react-player": "^2.13.0",
-    "react-router-dom": "^6.14.2",
-    "react-scripts": "^2.1.8",
-    "typescript": "^5.2.2",
+    "react-redux": "^9.0.4",
+    "react-router-dom": "^6.21.1",
+    "redux": "^5.0.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-svgr": "^4.2.0",
+    "vite-tsconfig-paths": "^4.2.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +57,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "type": "module"
 }
