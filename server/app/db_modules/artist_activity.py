@@ -1,11 +1,9 @@
-from sqlalchemy import Column, Integer, ForeignKey
 from dataclasses import dataclass
+from sqlalchemy import Column, Integer, ForeignKey
 
-from . import Base
+from app import db
 
-
-@dataclass
-class ArtistActivity(Base):
+class ArtistActivity(db.Model):
     __tablename__ = "artist_activity"
       
     artist_id = Column(Integer, ForeignKey("artist.id"), primary_key=True)

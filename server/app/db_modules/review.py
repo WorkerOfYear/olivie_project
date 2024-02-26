@@ -1,8 +1,10 @@
 from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from . import Base
 
-class Review(Base):
+from app import db
+
+
+class Review(db.Model):
     __tablename__ = "review"
 
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), primary_key=True)

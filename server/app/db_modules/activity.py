@@ -1,17 +1,17 @@
+from dataclasses import dataclass
 from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from dataclasses import dataclass
+
+from app import db
 
 
-from . import Base
-
-
-@dataclass
-class Activity(Base):
+class Activity(db.Model):
     __tablename__ = "activity"
 
-    id: Mapped[int] = mapped_column(init=False, primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True)
     is_active: Mapped[bool] = mapped_column(default=True)
 
-    related_artists = relationship("Artist", secondary="artist_activity", back_populates="activities")
+    related_artists = relationship(
+        "Artist", secondary="artist_activity", back_populates="activities"
+    )

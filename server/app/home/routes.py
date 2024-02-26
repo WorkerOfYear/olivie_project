@@ -1,7 +1,7 @@
 from flask import jsonify
 
 from app.db_modules.artist import Artist
-from app.db_modules import db
+from app import db
 from . import homepage_bp
 
 @homepage_bp.route("/")

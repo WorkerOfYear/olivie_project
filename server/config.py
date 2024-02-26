@@ -6,20 +6,18 @@ load_dotenv()
 
 
 class DevelopmentConfig(object):
-    SECRET_KEY = os.getenv('SECRET_KEY') or 'development-secret'
+    SECRET_KEY = os.getenv("SECRET_KEY") or "development-secret"
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = False    
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_ECHO = False
 
     DEBUG = True
 
-    # APPLICATION_ROOT = os.getenv("APPLICATION_ROOT") or os.getcwd()
-    MAPBOX_TOKEN = os.getenv('MAPBOX_TOKEN')
+    MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
 
-# class ProductionConfig(Config):
-#     DATABASE_URI = 'mysql://user@localhost/foo'
-
-# class TestingConfig(Config):
-#     DATABASE_URI = 'sqlite:///:memory:'
-#     TESTING = True
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Strict"
+    SESSION_PERMANENT = False
+    SESSION_USE_SIGNER = True

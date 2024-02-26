@@ -10,7 +10,7 @@ from app.db_modules.user import User
 from app.db_modules.activity import Activity
 from app.db_modules.artist_activity import ArtistActivity
 from app.db_modules.review import Review
-from app.db_modules import db
+from app import db
 
 from . import artist_bp
 

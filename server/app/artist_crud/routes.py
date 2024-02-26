@@ -1,12 +1,13 @@
 from flask import jsonify
-from flask import request
+from flask import request, Request
 from flask_restful import Resource, Api
 
 from app.db_modules.artist import Artist
 from app.db_modules.activity import Activity
 from app.db_modules.review import Review
 from app.db_modules.artist_activity import ArtistActivity
-from app.db_modules import db
+from app import db
+
 from . import artist_crud_bp
 
 api = Api(artist_crud_bp)

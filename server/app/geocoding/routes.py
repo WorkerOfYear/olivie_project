@@ -1,14 +1,15 @@
+import requests
+
 from flask import request, jsonify
 from flask import current_app
 from flask_restful.reqparse import RequestParser
 from flask_restful import Api, Resource, abort
 from sqlalchemy import func
-import requests
 from loguru import logger
 from difflib import get_close_matches
 
 from app.db_modules.artist import Artist
-from app.db_modules import db
+from app import db
 
 from . import geocoding_bp
 

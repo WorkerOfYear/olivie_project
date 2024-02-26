@@ -1,20 +1,19 @@
-from sqlalchemy.orm import Mapped, mapped_column, MappedAsDataclass, relationship
-from dataclasses import dataclass
-
-from . import Base
 from typing import Optional, List
+from sqlalchemy.orm import Mapped, mapped_column, MappedAsDataclass, relationship
+
+from app import db
 
 
-@dataclass
-class Artist(Base):
+class Artist(db.Model):
     __tablename__ = "artist"
 
-    id: Mapped[int] = mapped_column(init=False, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(unique=True)
-    artist_name: Mapped[str]
+    artist_name: Mapped[str] = mapped_column(max=24)
+
     description: Mapped[Optional[str]] = None
-    email: Mapped[str]
-    phone_number: Mapped[str]
+    email: Mapped[Optional[str]] = None
+    phone_number: Mapped[Optional[str]] = None
     photo_url: Mapped[Optional[str]] = None
     professional_webpage: Mapped[Optional[str]] = None
     instagram_url: Mapped[Optional[str]] = None
@@ -23,14 +22,9 @@ class Artist(Base):
     promo_video_url: Mapped[Optional[str]] = None
     address: Mapped[str]
     location: Mapped[Optional[str]] = None
-    is_premium: Mapped[bool]
+    is_premium: Mapped[bool] = False
 
-    # activities = relationship("Activity", secondary="artist_activity", back_populates="related_artists")
-    # reviews = relationship("Review", back_populates="artist")
-    
-    activities: Mapped[List["Activity"]] = relationship("Activity", secondary="artist_activity", back_populates="related_artists")
-    # location: Mapped[str]
-    
-    # activities = relationship("Activity", secondary="artist_activity", back_populates="related_artists")
+    activities: Mapped[List["Activity"]] = relationship(
+        "Activity", secondary="artist_activity", back_populates="related_artists"
+    )
     reviews: Mapped[List["Review"]] = relationship("Review", back_populates="artist")
-

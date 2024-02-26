@@ -1,11 +1,9 @@
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import MappedAsDataclass
 from flask_sqlalchemy import SQLAlchemy
-from app import app
+from flask_sqlalchemy.model import Model, BindMetaMixin
+from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 
-
-class Base(MappedAsDataclass, DeclarativeBase):
+class NoNameMeta(BindMetaMixin, DeclarativeMeta):
     """subclasses will be converted to dataclasses"""
 
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(model_class=declarative_base(cls=Model, metaclass=NoNameMeta))
