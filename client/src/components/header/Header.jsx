@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import Logo from "../../static/img/Logo.svg";
 import UserService from "../../API/UserService";
-import { LOGIN_ROUTE, REGISTER_ROUTE } from "../../routes";
+import {
+  ARTISTSCATEGORIES_ROUTE,
+  LOGIN_ROUTE,
+  REGISTER_ROUTE,
+} from "../../routes";
 import AccDropdown from "../accdropdown/AccDropdown";
 
 export const Header = () => {
@@ -17,7 +21,7 @@ export const Header = () => {
     // fetchUser().then((data) =>
     //   data ? setUser(data) : setUser({ name: "artem" })
     // );
-    setUser(true)
+    setUser(true);
   }, []);
 
   // const fetchUser = async () => {
@@ -30,7 +34,7 @@ export const Header = () => {
   const logoutUser = async () => {
     // await UserService.logout();
     // window.location.href = "/";
-    setUser(false)
+    setUser(false);
   };
 
   return (
@@ -44,7 +48,9 @@ export const Header = () => {
           </div>
           <ul className="header__nav">
             <li>
-              <button>ARTIST</button>
+              <button onClick={() => navigate(ARTISTSCATEGORIES_ROUTE)}>
+                ARTIST
+              </button>
             </li>
             <li>
               <button>VACANCY</button>
@@ -54,7 +60,7 @@ export const Header = () => {
             </li>
           </ul>
           {user ? (
-            <AccDropdown logout={logoutUser}/>
+            <AccDropdown logout={logoutUser} />
           ) : (
             <div className="signin-signup">
               <button

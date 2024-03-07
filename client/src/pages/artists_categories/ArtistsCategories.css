@@ -1,0 +1,11 @@
+.artists-categories {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 30px 80px;
+}
+
+.artists-categories .figure-img {
+    border-radius: 4px;
+}

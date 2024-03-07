@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import AuthForm from "../../components/authform/AuthForm";
+import AuthForm from "components/authform/AuthForm";
 
 const Register = () => {
   const [email, setEmail] = useState("");

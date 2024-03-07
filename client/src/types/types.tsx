@@ -8,7 +8,7 @@ export interface IReview {
   artist_id: number;
   user_id: number;
   comment: string;
-  grade: boolean;
+  grade: number;
 }
 
 export interface IArtist {

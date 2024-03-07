@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import "./ArtistsCards.css";
 import SearchService from "../../API/SearchService";
-import { mockArtists } from "../../API/mock/mockArtists";
 import SearchBar from "../../components/searchbar/SearchBar";
-import Cards from "../../components/cards/Cards";
+import Cards from "../../components/cards/CardsList";
 import Filter from "../../components/ filter/Filter";
 import { IArtist } from "types/types";
-import { useAppSelector } from "store/hooks";
-import {
-  selectActivity,
-  selectAddress,
-  selectRadius,
-} from "store/searchReducer";
+
+import "./ArtistsCards.css";
 
 const Artist = () => {
   const [artists, setArtists] = useState<IArtist[] | null>(null);
@@ -36,32 +30,26 @@ const Artist = () => {
     );
   };
 
-  // useEffect(() => {
-  //   fetchArtists().then((output) => {
-  //     output ? setData(output) : setData(mockArtists);
-  //   });
-  // }, []);
-
-  // const fetchArtists = async () => {
-  //   try {
-  //     let result;
-  //     if (who === "" && where === "") {
-  //       result = await SearchService.getAll();
-  //     } else {
-  //       result = await SearchService.getArtistByInput(who, where);
-  //     }
-  //     return result;
-  //   } catch (err) {
-  //     console.error("Ошибка при запросе к API:", err);
-  //   }
-  // };
-
   return (
     <div className="container">
       <div className="artist">
         <SearchBar activity={activity} radius={radius} address={address} />
         <Filter />
-        {artists != null ? <Cards artists={artists} /> : <p>No results</p>}
+        {artists != null ? (
+          <Cards artists={artists} />
+        ) : (
+          <p
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "50px",
+              fontSize: "24px",
+            }}
+          >
+            No results
+          </p>
+        )}
       </div>
     </div>
   );

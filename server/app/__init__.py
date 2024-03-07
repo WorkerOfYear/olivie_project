@@ -11,27 +11,33 @@ app.config["SESSION_REDIS"] = Redis.from_url("redis://127.0.0.1:6379")
 app.config.from_object("config.DevelopmentConfig")
 
 from app.db_modules import db
-from app.extensions import bcrypt, cors, session, migrate, ma
+from app.extensions import bcrypt, cors, session, migrate, ma, api
 
 db.init_app(app)
 ma.init_app(app)
 bcrypt.init_app(app)
 session.init_app(app)
 cors.init_app(app, supports_credentials=True)
-
 migrate.init_app(app, db)
+api.init_app(app)
 
-from app.auth import auth_bp
-from app.artist import artist_bp
-from app.home import homepage_bp
-from app.geocoding import geocoding_bp
-from app.artist_crud import artist_crud_bp
+# from app.auth import auth_bp
+# from app.artist import artist_bp
+# from app.home import homepage_bp
+# from app.geocoding import geocoding_bp
+# from app.artist_crud import artist_crud_bp
 
-app.register_blueprint(auth_bp)
-app.register_blueprint(artist_crud_bp)
-app.register_blueprint(artist_bp)
-app.register_blueprint(homepage_bp)
-app.register_blueprint(geocoding_bp)
+# app.register_blueprint(auth_bp)
+# app.register_blueprint(artist_crud_bp)
+# app.register_blueprint(artist_bp)
+# app.register_blueprint(homepage_bp)
+# app.register_blueprint(geocoding_bp)
+
+from app.auth import auth_ns
+from app.artist_crud import artist_crud_ns
+
+api.add_namespace(auth_ns)
+api.add_namespace(artist_crud_ns)
 
 
 # if you want create local db from scratch

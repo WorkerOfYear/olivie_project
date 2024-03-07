@@ -8,6 +8,8 @@ import { HiOutlineMail } from "react-icons/hi";
 
 import { IArtist } from "types/types";
 import "./ArtistTabs.css";
+import Gallery from "./Gallery";
+import Reviews from "./Reviews";
 
 interface ArtistTabsProps {
   artist: IArtist;
@@ -41,24 +43,7 @@ const ArtistTabs: FC<ArtistTabsProps> = ({ artist }) => {
         </p> */}
       </Tab>
       <Tab eventKey="gallery" title="Gallery">
-        <div className="gallery__videos">
-          {/* {artist.video ? (
-            artist.video.map((item) => (
-              <div key={item.video_url} className="player-wrapper">
-                <h2>{item.video_desk}</h2>
-                <ReactPlayer
-                  url={item.video_url}
-                  width="200px"
-                  height="350px"
-                  controls={true}
-                />
-              </div>
-            ))
-          ) : (
-            <p>No gallery</p>
-          )} */}
-          {artist.promo_video_url}
-        </div>
+        <Gallery artist={artist} />
       </Tab>
       <Tab eventKey="contacts" title="Contacts">
         <div className="contacts">
@@ -79,7 +64,7 @@ const ArtistTabs: FC<ArtistTabsProps> = ({ artist }) => {
         </div>
       </Tab>
       <Tab eventKey="reviews" title="Reviews">
-        {artist.reviews ? <div>{JSON.stringify(artist.reviews)}</div> : null}
+        <Reviews artist={artist} />
       </Tab>
     </Tabs>
   );

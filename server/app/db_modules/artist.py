@@ -1,16 +1,14 @@
 from typing import Optional, List
-from sqlalchemy.orm import Mapped, mapped_column, MappedAsDataclass, relationship
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app import db
+from . import Base
 
-
-class Artist(db.Model):
+class Artist(Base):
     __tablename__ = "artist"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(unique=True)
-    artist_name: Mapped[str] = mapped_column(max=24)
-
+    artist_name: Mapped[str]
     description: Mapped[Optional[str]] = None
     email: Mapped[Optional[str]] = None
     phone_number: Mapped[Optional[str]] = None
@@ -24,7 +22,14 @@ class Artist(db.Model):
     location: Mapped[Optional[str]] = None
     is_premium: Mapped[bool] = False
 
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    user: Mapped["User"] = relationship(back_populates="artist")
+
     activities: Mapped[List["Activity"]] = relationship(
-        "Activity", secondary="artist_activity", back_populates="related_artists"
+        secondary="artist_activity", back_populates="related_artists"
     )
-    reviews: Mapped[List["Review"]] = relationship("Review", back_populates="artist")
+
+    reviews: Mapped[List["Review"]] = relationship(back_populates="artist")
+
+    def __repr__(self):
+        return f"<Artist {self.artist_name}>"

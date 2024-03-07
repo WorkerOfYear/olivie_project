@@ -1,8 +1,19 @@
 .artist_cards {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: first baseline;
-    justify-content: space-evenly;
-    margin-top: 5rem;
-    gap: 5rem;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  align-items: first baseline;
+  justify-content: space-evenly;
+  margin-top: 5rem;
+  gap: 5rem;
+}
+
+.card-button {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  width: 10rem;
+}
+
+.custom-card .card-button:hover {
+  background-color: #6e38f7;
+}

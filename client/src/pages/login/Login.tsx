@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 
 import "./Login.css";
-import UserService from "../../API/UserService";
-import AuthForm from "../../components/authform/AuthForm";
+import UserService from "API/UserService";
+import AuthForm from "components/authform/AuthForm";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginUser = async () => {
-    const response = await UserService.postLogin(email, password);
-
-    if (response.status === 401) {
-      alert("Invalid credentials");
-    }
-    if (response.status === 200) {
-      window.location.href = "/";
-    }
+  const loginUser = () => {
+    UserService.postLogin(email, password).then((response) => {
+      // if (response.status === 401) {
+      //   alert("Invalid credentials");
+      // }
+      // if (response.status === 200) {
+      //   window.location.href = "/";
+      // }
+      console.log(response)
+    });
   };
 
   return (

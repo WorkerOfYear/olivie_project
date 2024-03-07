@@ -5,6 +5,8 @@ import { ISuggestion } from "types/types";
 import { useAppDispatch } from "store/hooks";
 import { set_address } from "store/searchReducer";
 
+const access_token = import.meta.env.VITE_ACCESS_TOKEN;
+
 interface WhereInputProps {
   where?: string;
 }
@@ -35,8 +37,7 @@ const WhereInput: FC<WhereInputProps> = ({ where }) => {
   const fetchSuggestions = async () => {
     try {
       const response = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=
-pk.eyJ1IjoianVsaWV0dHdpbiIsImEiOiJjbG43amQydmIweWMwMmtwZnN3ZzE3OHA4In0.3zvwgivCfshT2YPd991nQg`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${access_token}`
       );
       if (response.ok) {
         const data = await response.json();

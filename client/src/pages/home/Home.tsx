@@ -13,15 +13,17 @@ const Search = () => {
           <SearchBar />
         </div>
       </div>
-      <section id="main_banner">
-        <img src={StarsBanner} />
+      <div
+        id="main_banner"
+        style={{ backgroundImage: `url("${StarsBanner}")` }}
+      >
         <div className="under-search">
           <div className="post__row">
             <button className="post-resume">POST RESUME</button>
             <button className="post-vacancy">POST VACANCY</button>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };

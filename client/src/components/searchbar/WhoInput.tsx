@@ -30,7 +30,7 @@ const WhoInput: FC<WhoInputProps> = ({ who }) => {
           onChange={handleOnChange}
           type="text"
           className="search__what"
-          placeholder="WHO    like guitarist..."
+          placeholder="WHAT    like guitarist..."
         />
       </div>
     </>

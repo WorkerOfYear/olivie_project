@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import RangeSlider from "react-bootstrap-range-slider";
 
 import "./Filter.css";
 
 const Filter = () => {
+  const [coins, setCoins] = useState(2);
+
   return (
     <Form className="filter-form mt-4">
       <Form.Group as={Row} className="mb-3">
         <Col>
-          <Form.Label>Budget</Form.Label>
-          <InputGroup className="mb-3">
-            <InputGroup.Text>From</InputGroup.Text>
-            <Form.Control aria-label="" />
-            <InputGroup.Text>To</InputGroup.Text>
-            <Form.Control aria-label="" />
-          </InputGroup>
+          <Form.Label>Coins</Form.Label>
+          <Form.Group as={Row}>
+            <Col xs="9">
+              <RangeSlider
+                value={coins}
+                onChange={(changeEvent) => setCoins(changeEvent.target.value)}
+                min={1}
+                max={5}
+                size="sm"
+                variant={"secondary"}
+              />
+            </Col>
+            <Col xs="3">
+              <Form.Control value={coins} onChange={() => {}} />
+            </Col>
+          </Form.Group>
         </Col>
         <Col>
           <Form.Label>Experience</Form.Label>

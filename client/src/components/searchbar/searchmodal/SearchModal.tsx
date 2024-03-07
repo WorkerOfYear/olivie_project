@@ -1,8 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
+
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import Pagination from "react-bootstrap/Pagination";
+
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { selectRadius, set_radius } from "store/searchReducer";
 
@@ -14,6 +16,7 @@ interface SearchModalProps {
 
 const SearchModal: FC<SearchModalProps> = (props) => {
   const dispatch = useAppDispatch();
+  const [unit, setUnit] = useState<"kilometers" | "miles">("kilometers");
 
   useEffect(() => {
     if (props.radius !== undefined) {
@@ -45,25 +48,39 @@ const SearchModal: FC<SearchModalProps> = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Choose region and area
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>City or region</h4>
-        <Form.Control
-          aria-label="Default"
-          aria-describedby="inputGroup-sizing-default"
-        />
-        <h4 className="mt-3">Search radius</h4>
-        <Pagination size="sm">{items}</Pagination>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="light" onClick={props.onHide}>
-          Close
-        </Button>
-      </Modal.Footer>
+      <Form>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Choose region and area
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>City or region</h4>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+          />
+          <h4 className="mt-3">Search radius</h4>
+          <Pagination size="sm">{items}</Pagination>
+          <Form.Check
+            checked={(unit === "kilometers")}
+            type="radio"
+            label="kilometers"
+            onClick={() => {setUnit("kilometers")}}
+          />
+          <Form.Check
+            checked={(unit === "miles")}
+            type="radio"
+            label="miles"
+            onClick={() => {setUnit("miles")}}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="light" onClick={props.onHide}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Form>
     </Modal>
   );
 };

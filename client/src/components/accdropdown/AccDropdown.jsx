@@ -1,32 +1,27 @@
-import React, { useState } from "react";
-import { VscAccount } from "react-icons/vsc";
-import { MY_RESUME } from "../../routes";
+import React from "react";
+import Avatar from "react-avatar";
+import Dropdown from "react-bootstrap/Dropdown";
 
+import { MY_RESUME } from "../../routes";
 import "./AccDropdown.css";
 
-const AccDropdown = ({logout}) => {
-  const [showAccDropdown, setShowAccDropdown] = useState(false);
-
+const AccDropdown = ({ logout }) => {
   return (
-    <div
-      className="profile"
-      onMouseEnter={() => setShowAccDropdown(true)}
-      onMouseLeave={() => setShowAccDropdown(false)}
-    >
-      <div className="profile-icon-wrapper">
-        <VscAccount />
-      </div>
-      {showAccDropdown && (
-        <div className="account-dropdown">
-          <ul className="account-menu">
-            <li><button>Profile</button></li>
-            <li><button><a href={MY_RESUME}>My resume</a></button></li>
-            <li><button>Settings</button></li>
-            <li><button onClick={() => logout}>Log out</button></li>
-          </ul>
-        </div>
-      )}
-    </div>
+    <Dropdown className="profile" drop={"down-centered"}>
+      <Dropdown.Toggle className="dropdown-toggle" as={"span"}>
+        <div className="profile-icon-wrapper"><Avatar size="40" round={true} name="Test User" /></div>
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Header>
+          <span>Test User</span>
+        </Dropdown.Header>
+        <Dropdown.Item className="dropdown-item" href="#">Profile</Dropdown.Item>
+        <Dropdown.Item className="dropdown-item" href={MY_RESUME}>My resume</Dropdown.Item>
+        <Dropdown.Item className="dropdown-item" href="#">My vacancies</Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item className="dropdown-item" onClick={() => logout}>Log out</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 

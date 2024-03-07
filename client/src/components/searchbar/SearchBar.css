@@ -67,6 +67,10 @@
   transition: 0.3s;
 }
 
+.search__btn > span {
+  color: #6e38f7;
+}
+
 .search__btn:hover {
   -moz-box-shadow: 0 0 10px #6e38f7;
   -webkit-box-shadow: 0 0 10px #6e38f7;

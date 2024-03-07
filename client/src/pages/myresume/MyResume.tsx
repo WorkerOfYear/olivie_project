@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { GrFormAdd } from "react-icons/gr";
 
 import "./MyResume.css";
-import CreateResumeForm from "../../components/createresume/CreateResumeForm";
+import CreateResumeForm from "components/createresume/CreateResumeForm";
 
 const MyResume = () => {
   const [showCreate, setShowCreate] = useState(false);

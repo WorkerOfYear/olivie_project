@@ -1,6 +1,6 @@
 from flask import jsonify
 from flask import request, Request
-from flask_restful import Resource, Api
+from flask_restx import Resource, Api
 
 from app.db_modules.artist import Artist
 from app.db_modules.activity import Activity
@@ -8,9 +8,10 @@ from app.db_modules.review import Review
 from app.db_modules.artist_activity import ArtistActivity
 from app import db
 
-from . import artist_crud_bp
+# from .dto import ArtistDto
 
-api = Api(artist_crud_bp)
+# api: Namespace = ArtistDto.api
+
 
 class ArtistResource(Resource):
     def get(self, id):
@@ -65,8 +66,8 @@ class ArtistResource(Resource):
             
             db.session.commit()
             return '', 204
-        else:
-            return {'message': 'Artist not found'}, 404
+            
+        return {'message': 'Artist not found'}, 404
     
     def delete(self, id):
         artist = db.session.query(Artist).filter(Artist.id == id).first()

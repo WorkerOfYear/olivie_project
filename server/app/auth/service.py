@@ -19,15 +19,12 @@ class AuthService:
 
         try:
             user: User | None = db.session.query(User).filter(User.email == email).first()
-
+            
             if user and user.verify_password(password):
                 user_info = user_schema.dump(user)
-
                 resp = message(True, "Successfully logged in.")
                 resp["user"] = user_info
-
                 session["user_id"] = user.id
-
                 return resp, 200
 
             return err_resp(

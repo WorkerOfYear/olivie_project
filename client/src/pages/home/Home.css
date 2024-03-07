@@ -1,5 +1,4 @@
 .home {
-  height: 100%;
   padding-top: 100px;
 }
 
@@ -7,31 +6,31 @@
   width: 100%;
   display: inline-block;
   position: relative;
-  padding-top: 3vh;
 }
 
 #main_banner {
+  flex: 4 2 auto;
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 5rem;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-#main_banner img {
+#main_banner {
   position: relative;
 }
 
-@media (max-width: 1024px) {
-  #main_banner img {
+@media (max-width: 1280px) {
+  #main_banner {
     display: none;
   }
 }
 
 @media (min-width: 2440px) {
-  #main_banner img {
+  #main_banner {
     display: none;
   }
 }
@@ -39,7 +38,7 @@
 .post__row {
   margin-bottom: 2rem;
   width: 100%;
-  top: -150px;
+  top: 150px;
   position: relative;
   display: flex;
   gap: 2rem;

@@ -7,7 +7,6 @@ class ArtistDto:
     artist_obj = api.model(
         "Artist object",
         {
-            "user_id": fields.Integer(required=True),
             "artist_name": fields.String(required=True),
             "description": fields.String,
             "email": fields.String,
@@ -19,8 +18,16 @@ class ArtistDto:
             "vk_url": fields.String,
             "promo_video_url": fields.String,
             "address": fields.String(required=True),
-            "location": fields.String,
             "is_premium": fields.Boolean,
-            "created_date": fields.Date,
+            "activities": fields.List(fields.String)
+        },
+    )
+
+    create_success = api.model(
+        "Artist create",
+        {
+            "status": fields.Boolean,
+            "message": fields.String,
+            "user": fields.Nested(artist_obj),
         },
     )
